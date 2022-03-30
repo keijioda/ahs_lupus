@@ -1,1 +1,1 @@
-# ahs_lupus
+# AHS-2 Lupus Study

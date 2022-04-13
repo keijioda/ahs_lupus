@@ -34,6 +34,15 @@
 - ALA (calculated)
 - DHA (calculated)
 - EPA (calculated)
+- dFiber (calculated)
+- sFiber (calculated)
+- iFiber (calculated)
+- Carbohydrates (calculated)
+- Protein (calculated)
+- Total fat (calculated)
+- SFA (calculated)
+- MUFA (calculated)
+- PUFA (calculated)
 - MultiAYN
 - MultiAFR
 - MultiAAM
@@ -48,9 +57,14 @@
 - FishOilA
 
 ### Female variables
+- AgeMense
 - Menopaus
 - Menopres
 - HRT
+- BCP
+- Progest
+- Historec
+- Oophorec
 
 ### Outcomes
 - SLE
@@ -58,6 +72,14 @@
 - A04Q8
 - Deceased (NDI)
 - ICD code (NDI)
+
+### Comorbidities
+- HBPY
+- HBP
+- TypeIY
+- TypeI
+- TypeIIY
+- TypeII
 
 ## HHF3 Questionnaire
 - Lupus 1st diagnosis

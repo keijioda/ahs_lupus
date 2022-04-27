@@ -1,5 +1,10 @@
+---
+title: "AHS-2 lupus study"
+output: github_document
+---
 
-# AHS-2 lupus study
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
 
 # Required packages
 pacs <- c("tidyverse", "tableone")
@@ -15,9 +20,6 @@ search_var <- function(df, pattern, ...) {
 # Read data: n = 93,467 and 111 variables
 filepath <- "./data/lupus-initial-dataset-v1-2022-04-25.csv"
 lupus0  <- read_csv(filepath)
-dim(lupus0)
-names(lupus0)
-n_distinct(lupus0$analysisid)
 
 # Include non-Hispanic White or Black
 # Exclude age < 30
@@ -49,16 +51,55 @@ lupus <- lupus0 %>%
 
 levels(lupus$vegstat) <- c("Vegans", "Lacto-ovo", "Pesco", "Semi", "Non-veg")
 levels(lupus$vegstat3) <- c("Vegetarians", "Vegetarians", "Pesco", "Non-veg", "Non-veg")
+```
 
-# Yields n = 77,795 and n.cases = 237
-dim(lupus)
-lupus %>% count(prev_sle) %>% mutate(pct = n / sum(n) * 100)
+## Dataset
+
+* Filename: `lupus-initial-dataset-v1-2022-04-25.csv`
+  * Data received on 4/25/2022
+  * Includes *n* = `r nrow(lupus0)` subjects and `r ncol(lupus0)` variables
+  * No imputations
+  
+* To create an analytic file:
+  * Included only non-Hispanic White or Black
+  * Excluded if age at baseline < 30 years
+  * Excluded extreme energy intake of <500 or >4500 kcal
+  * Excluded any subjects with missing gender, education, smoking history, dietary pattern and BMI
+  * This resulted in *n* = `r nrow(lupus)` subjects (`r nrow(lupus0) - nrow(lupus)` subjects were excluded)
+
+## Outcome
+
+* Prevalent cases of SLE were identified using the baseline questionnaire
+  * Includes only those who "have been treated for SLE in the last 12 months" at baseline
+  * ("Years since the 1st diagnosis" was not used, following the case definition in the manuscript)
+* There were `r sum(lupus$prev_sle == "Yes")` prevalent cases (`r round(sum(lupus$prev_sle == "Yes") / nrow(lupus) * 100, 2)`%) of SLE
+  
+## Descriptive table
+
+* Descriptive table stratified by cases/non-cases
+  * Variables were categorized following the original manuscript
+
+```{r echo = FALSE}
 
 # Descriptive table
 table_vars <- c("age", "agecat", "black", "sex", "smkever", "educat3", "vegstat3", "bmi", "bmicat")
 lupus %>% CreateTableOne(table_vars, strata = "prev_sle", data = .) %>%
-  print(showAllLevels = TRUE)
+  kableone(showAllLevels = TRUE, pDigits = 4) 
 
+```
+
+## Logistic regression on demographics and lifestyles
+
+* Four logistic models were fitted using prevalent SLE as the outcome.
+  * Model 1 includes: age, race and gender
+  * Model 2 adds dietary patterns
+  * Model 3 further adds smoking history and education levels
+  * Model 4 further adds BMI categories
+  * (I have changed references in some variables)
+
+* The table below shows estimated odds ratios and 95% Wald confidence intervals from each logistic model:
+
+```{r echo = FALSE, results = 'asis'}
 # Logistic regression
 
 # Change references
@@ -66,14 +107,6 @@ lupus_md <- lupus
 lupus_md$vegstat3 <- relevel(lupus_md$vegstat3, ref = "Non-veg")
 lupus_md$educat3 <- relevel(lupus_md$educat3, ref = "Col grad")
 lupus_md$agecat <- relevel(lupus_md$agecat, ref = ">=60")
-
-# Function to display OR with 95% Wald CI
-or_out <- function(glm){
-  orci <- confint.default(glm)
-  out <- data.frame(OR = exp(coef(glm)), lwr = exp(orci)[, 1], upr = exp(orci)[, 2])
-  rownames(out) <- rownames(orci)
-  out %>% slice(-1)
-}
 
 RHS <- c("agecat", "black", "sex")
 fm <- formula(paste("prev_sle ~", paste0(RHS, collapse = " + ")))
@@ -83,20 +116,21 @@ final1 <- update(base1, . ~ . + vegstat3 + smkever + educat3)
 final2 <- update(base1, . ~ . + vegstat3 + smkever + educat3 + bmicat)
 
 models <- list(base1, base2, final1, final2)
-ci <- list(exp(confint.default(base1)), exp(confint.default(base2)), exp(confint.default(final1)), exp(confint.default(final2)))
-var_labels <- c("Age.: 30-39", 
-                "Age.: 40-59", 
+ci <- list(exp(confint.default(base1)), exp(confint.default(base2)), 
+           exp(confint.default(final1)), exp(confint.default(final2)))
+var_labels <- c("Age: 30-39", 
+                "Age: 40-59", 
                 "Race: Black", 
-                "Sex.: Male", 
+                "Sex: Male", 
                 "Diet: Vegetarians", 
                 "Diet: Pesco veg", 
                 "Smkg: Ever", 
                 "Educ: HS or less", 
                 "Educ: Some college", 
-                "BMI.: Overweight", 
-                "BMI.: Obese")
+                "BMI: Overweight", 
+                "BMI: Obese")
 stargazer::stargazer(models, 
-                     type = "text", 
+                     type = "html", 
                      digits = 2,
                      dep.var.caption = "",
                      dep.var.labels = "Outcome: Prevalent SLE",
@@ -110,3 +144,6 @@ stargazer::stargazer(models,
                      omit = "Constant", 
                      omit.stat = c("aic", "ll"),
                      omit.table.layout = "n")
+
+```
+

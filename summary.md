@@ -10,7 +10,7 @@ AHS-2 lupus study
 -   To create an analytic file:
     -   Included only non-Hispanic White or Black
     -   Excluded if age at baseline \< 30 years
-    -   Excluded extreme energy intake of \<500 or >4500 kcal
+    -   Excluded extreme energy intake of \<500 or \>4500 kcal
     -   Excluded any subjects with missing gender, education, smoking
         history, dietary pattern and BMI
     -   This resulted in *n* = 77795 subjects (15672 subjects were
@@ -50,6 +50,8 @@ AHS-2 lupus study
 | vegstat3 (%)    | Vegetarians  | 29782 (38.4)  | 68 (28.7)     | 0.0078   |      |
 |                 | Pesco        | 7457 ( 9.6)   | 24 (10.1)     |          |      |
 |                 | Non-veg      | 40319 (52.0)  | 145 (61.2)    |          |      |
+| take_vd (%)     | No           | 67882 (87.5)  | 182 (76.8)    | \<0.0001 |      |
+|                 | Yes          | 9676 (12.5)   | 55 (23.2)     |          |      |
 | bmi (mean (SD)) |              | 27.22 (6.03)  | 29.86 (9.19)  | \<0.0001 |      |
 | bmicat (%)      | Normal       | 31158 (40.2)  | 74 (31.2)     | 0.0020   |      |
 |                 | Overweight   | 26937 (34.7)  | 82 (34.6)     |          |      |
@@ -60,21 +62,22 @@ AHS-2 lupus study
 -   Four logistic models were fitted using prevalent SLE as the outcome.
     -   Model 1 includes: age, race and gender
     -   Model 2 adds dietary patterns
-    -   Model 3 further adds smoking history and education levels
-    -   Model 4 further adds BMI categories
+    -   Model 3 further adds vitamin D supplement use
+    -   Model 4 further adds smoking history and education levels
+    -   Model 5 further adds BMI categories
     -   (I have changed references in some variables)
 -   The table below shows estimated odds ratios and 95% Wald confidence
     intervals from each logistic model:
 
 <table style="text-align:center">
 <tr>
-<td colspan="5" style="border-bottom: 1px solid black">
+<td colspan="6" style="border-bottom: 1px solid black">
 </td>
 </tr>
 <tr>
 <td style="text-align:left">
 </td>
-<td colspan="4">
+<td colspan="5">
 Outcome: Prevalent SLE
 </td>
 </tr>
@@ -93,43 +96,118 @@ Model 3
 <td>
 Model 4
 </td>
+<td>
+Model 5
+</td>
 </tr>
 <tr>
-<td colspan="5" style="border-bottom: 1px solid black">
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-Age: 30-39
-</td>
-<td>
-0.53 (0.30, 0.93)
-</td>
-<td>
-0.52 (0.30, 0.92)
-</td>
-<td>
-0.51 (0.29, 0.90)
-</td>
-<td>
-0.53 (0.30, 0.93)
+<td colspan="6" style="border-bottom: 1px solid black">
 </td>
 </tr>
 <tr>
 <td style="text-align:left">
-Age: 40-59
+Age.: 30-39
 </td>
 <td>
-1.15 (0.88, 1.50)
+0.53
 </td>
 <td>
-1.14 (0.87, 1.49)
+0.52
 </td>
 <td>
-1.08 (0.82, 1.42)
+0.57
 </td>
 <td>
-1.08 (0.82, 1.42)
+0.56
+</td>
+<td>
+0.57
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.30, 0.93)
+</td>
+<td>
+(0.30, 0.92)
+</td>
+<td>
+(0.32, 1.00)
+</td>
+<td>
+(0.31, 0.99)
+</td>
+<td>
+(0.32, 1.02)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Age.: 40-59
+</td>
+<td>
+1.15
+</td>
+<td>
+1.14
+</td>
+<td>
+1.19
+</td>
+<td>
+1.13
+</td>
+<td>
+1.13
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.88, 1.50)
+</td>
+<td>
+(0.87, 1.49)
+</td>
+<td>
+(0.91, 1.56)
+</td>
+<td>
+(0.86, 1.49)
+</td>
+<td>
+(0.86, 1.49)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
 </td>
 </tr>
 <tr>
@@ -137,33 +215,105 @@ Age: 40-59
 Race: Black
 </td>
 <td>
-1.78 (1.37, 2.32)
+1.78
 </td>
 <td>
-1.67 (1.27, 2.20)
+1.67
 </td>
 <td>
-1.69 (1.29, 2.21)
+1.72
 </td>
 <td>
-1.62 (1.23, 2.13)
+1.73
+</td>
+<td>
+1.66
 </td>
 </tr>
 <tr>
 <td style="text-align:left">
-Sex: Male
 </td>
 <td>
-0.15 (0.09, 0.24)
+(1.37, 2.32)
 </td>
 <td>
-0.15 (0.09, 0.24)
+(1.27, 2.20)
 </td>
 <td>
-0.14 (0.08, 0.22)
+(1.31, 2.26)
 </td>
 <td>
-0.14 (0.08, 0.22)
+(1.32, 2.27)
+</td>
+<td>
+(1.26, 2.18)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Sex.: Male
+</td>
+<td>
+0.15
+</td>
+<td>
+0.15
+</td>
+<td>
+0.16
+</td>
+<td>
+0.14
+</td>
+<td>
+0.14
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.09, 0.24)
+</td>
+<td>
+(0.09, 0.24)
+</td>
+<td>
+(0.10, 0.26)
+</td>
+<td>
+(0.09, 0.24)
+</td>
+<td>
+(0.09, 0.24)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
 </td>
 </tr>
 <tr>
@@ -173,13 +323,48 @@ Diet: Vegetarians
 <td>
 </td>
 <td>
-0.73 (0.54, 0.98)
+0.73
 </td>
 <td>
-0.75 (0.56, 1.02)
+0.73
 </td>
 <td>
-0.79 (0.58, 1.08)
+0.76
+</td>
+<td>
+0.80
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+(0.54, 0.98)
+</td>
+<td>
+(0.54, 0.98)
+</td>
+<td>
+(0.56, 1.03)
+</td>
+<td>
+(0.59, 1.09)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
 </td>
 </tr>
 <tr>
@@ -189,13 +374,97 @@ Diet: Pesco veg
 <td>
 </td>
 <td>
-0.85 (0.55, 1.32)
+0.85
 </td>
 <td>
-0.88 (0.57, 1.36)
+0.85
 </td>
 <td>
-0.92 (0.59, 1.42)
+0.87
+</td>
+<td>
+0.92
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+(0.55, 1.32)
+</td>
+<td>
+(0.55, 1.31)
+</td>
+<td>
+(0.57, 1.35)
+</td>
+<td>
+(0.59, 1.42)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+VitD: Use VD supp
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+1.90
+</td>
+<td>
+1.88
+</td>
+<td>
+1.90
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(1.40, 2.58)
+</td>
+<td>
+(1.38, 2.55)
+</td>
+<td>
+(1.40, 2.58)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
 </td>
 </tr>
 <tr>
@@ -207,10 +476,42 @@ Smkg: Ever
 <td>
 </td>
 <td>
-1.71 (1.27, 2.31)
 </td>
 <td>
-1.68 (1.25, 2.27)
+1.70
+</td>
+<td>
+1.67
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(1.26, 2.30)
+</td>
+<td>
+(1.24, 2.25)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
 </td>
 </tr>
 <tr>
@@ -222,10 +523,42 @@ Educ: HS or less
 <td>
 </td>
 <td>
-0.72 (0.49, 1.04)
 </td>
 <td>
-0.70 (0.48, 1.02)
+0.73
+</td>
+<td>
+0.72
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(0.50, 1.06)
+</td>
+<td>
+(0.49, 1.04)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
 </td>
 </tr>
 <tr>
@@ -237,15 +570,16 @@ Educ: Some college
 <td>
 </td>
 <td>
-0.87 (0.65, 1.17)
 </td>
 <td>
-0.86 (0.64, 1.16)
+0.87
+</td>
+<td>
+0.86
 </td>
 </tr>
 <tr>
 <td style="text-align:left">
-BMI: Overweight
 </td>
 <td>
 </td>
@@ -254,12 +588,14 @@ BMI: Overweight
 <td>
 </td>
 <td>
-1.29 (0.94, 1.78)
+(0.65, 1.17)
+</td>
+<td>
+(0.64, 1.15)
 </td>
 </tr>
 <tr>
 <td style="text-align:left">
-BMI: Obese
 </td>
 <td>
 </td>
@@ -268,11 +604,102 @@ BMI: Obese
 <td>
 </td>
 <td>
-1.32 (0.95, 1.85)
+</td>
+<td>
 </td>
 </tr>
 <tr>
-<td colspan="5" style="border-bottom: 1px solid black">
+<td style="text-align:left">
+BMI.: Overweight
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+1.30
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(0.94, 1.79)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+BMI.: Obese
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+1.36
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(0.98, 1.90)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="6" style="border-bottom: 1px solid black">
 </td>
 </tr>
 <tr>
@@ -291,9 +718,12 @@ Observations
 <td>
 77,795
 </td>
+<td>
+77,795
+</td>
 </tr>
 <tr>
-<td colspan="5" style="border-bottom: 1px solid black">
+<td colspan="6" style="border-bottom: 1px solid black">
 </td>
 </tr>
 </table>

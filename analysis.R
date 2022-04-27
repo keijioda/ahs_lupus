@@ -37,6 +37,8 @@ lupus <- lupus0 %>%
     smkever = factor(smkever, labels = c("Never", "Ever")),
     educat3 = cut(educyou, breaks = c(0, 3, 6, 9)),
     educat3 = factor(educat3, labels = c("HS or less", "Some college", "Col grad")),
+    take_vd = ifelse(!is.na(vitd) & vitd == 2, 1, 0),
+    take_vd = factor(take_vd, labels = c("No", "Yes")),
     bmicat  = cut(bmi, breaks = c(0, 25, 30, Inf), right = FALSE),
     bmicat  = factor(bmicat, labels = c("Normal", "Overweight", "Obese")),
     vegstat = factor(vege_group_gen_bl, levels = c("vegan", "lacto", "pesco", "semi", "nonveg")),
@@ -55,9 +57,12 @@ dim(lupus)
 lupus %>% count(prev_sle) %>% mutate(pct = n / sum(n) * 100)
 
 # Descriptive table
-table_vars <- c("age", "agecat", "black", "sex", "smkever", "educat3", "vegstat3", "bmi", "bmicat")
+table_vars <- c("age", "agecat", "black", "sex", "smkever", "educat3", "vegstat3", "take_vd", "bmi", "bmicat")
 lupus %>% CreateTableOne(table_vars, strata = "prev_sle", data = .) %>%
   print(showAllLevels = TRUE)
+
+lupus %>% search_var("vitd")
+lupus %>% count(vitd)
 
 # Logistic regression
 
@@ -77,19 +82,25 @@ or_out <- function(glm){
 
 RHS <- c("agecat", "black", "sex")
 fm <- formula(paste("prev_sle ~", paste0(RHS, collapse = " + ")))
-base1 <- glm(fm, data = lupus_md, family = "binomial")
-base2 <- update(base1, . ~ . + vegstat3)
-final1 <- update(base1, . ~ . + vegstat3 + smkever + educat3)
-final2 <- update(base1, . ~ . + vegstat3 + smkever + educat3 + bmicat)
+m1 <- glm(fm, data = lupus_md, family = "binomial")
+m2 <- update(m1, . ~ . + vegstat3)
+m3 <- update(m1, . ~ . + vegstat3 + take_vd)
+m4 <- update(m1, . ~ . + vegstat3 + take_vd + smkever + educat3)
+m5 <- update(m1, . ~ . + vegstat3 + take_vd + smkever + educat3 + bmicat)
 
-models <- list(base1, base2, final1, final2)
-ci <- list(exp(confint.default(base1)), exp(confint.default(base2)), exp(confint.default(final1)), exp(confint.default(final2)))
+models <- list(m1, m2, m3, m4, m5)
+ci <- list(exp(confint.default(m1)), 
+           exp(confint.default(m2)), 
+           exp(confint.default(m3)), 
+           exp(confint.default(m4)), 
+           exp(confint.default(m5)))
 var_labels <- c("Age.: 30-39", 
                 "Age.: 40-59", 
                 "Race: Black", 
                 "Sex.: Male", 
                 "Diet: Vegetarians", 
                 "Diet: Pesco veg", 
+                "VitD: Use VD supp", 
                 "Smkg: Ever", 
                 "Educ: HS or less", 
                 "Educ: Some college", 
@@ -101,11 +112,10 @@ stargazer::stargazer(models,
                      dep.var.caption = "",
                      dep.var.labels = "Outcome: Prevalent SLE",
                      model.numbers = FALSE,
-                     column.labels = c("Model 1", "Model 2", "Model 3", "Model 4"),
+                     column.labels = c("Model 1", "Model 2", "Model 3", "Model 4", "Model 5"),
                      covariate.labels = var_labels,
                      apply.coef = exp, 
                      ci.custom = ci, 
-                     single.row = TRUE, 
                      star.cutoffs = NA, 
                      omit = "Constant", 
                      omit.stat = c("aic", "ll"),

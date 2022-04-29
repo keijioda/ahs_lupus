@@ -30,32 +30,443 @@ AHS-2 lupus study
 
 -   Descriptive table stratified by cases/non-cases
     -   Variables were categorized following the original manuscript
+-   I have added vitamin D supplement use (`take_vd`) in the table.
+    Notice that use of vitamin D supplement is associated with SLE.
 
-|                 | level        | No            | Yes           | p        | test |
-|:----------------|:-------------|:--------------|:--------------|:---------|:-----|
-| n               |              | 77558         | 237           |          |      |
-| age (mean (SD)) |              | 58.65 (14.28) | 57.33 (12.15) | 0.1539   |      |
-| agecat (%)      | 30-39        | 7619 ( 9.8)   | 14 ( 5.9)     | 0.0218   |      |
-|                 | 40-59        | 35187 (45.4)  | 126 (53.2)    |          |      |
-|                 | \>=60        | 34752 (44.8)  | 97 (40.9)     |          |      |
-| black (%)       | White        | 56736 (73.2)  | 140 (59.1)    | \<0.0001 |      |
-|                 | Black        | 20822 (26.8)  | 97 (40.9)     |          |      |
-| sex (%)         | Female       | 50322 (64.9)  | 220 (92.8)    | \<0.0001 |      |
-|                 | Male         | 27236 (35.1)  | 17 ( 7.2)     |          |      |
-| smkever (%)     | Never        | 61942 (79.9)  | 173 (73.0)    | 0.0107   |      |
-|                 | Ever         | 15616 (20.1)  | 64 (27.0)     |          |      |
-| educat3 (%)     | HS or less   | 16933 (21.8)  | 48 (20.3)     | 0.3841   |      |
-|                 | Some college | 30943 (39.9)  | 105 (44.3)    |          |      |
-|                 | Col grad     | 29682 (38.3)  | 84 (35.4)     |          |      |
-| vegstat3 (%)    | Vegetarians  | 29782 (38.4)  | 68 (28.7)     | 0.0078   |      |
-|                 | Pesco        | 7457 ( 9.6)   | 24 (10.1)     |          |      |
-|                 | Non-veg      | 40319 (52.0)  | 145 (61.2)    |          |      |
-| take_vd (%)     | No           | 67882 (87.5)  | 182 (76.8)    | \<0.0001 |      |
-|                 | Yes          | 9676 (12.5)   | 55 (23.2)     |          |      |
-| bmi (mean (SD)) |              | 27.22 (6.03)  | 29.86 (9.19)  | \<0.0001 |      |
-| bmicat (%)      | Normal       | 31158 (40.2)  | 74 (31.2)     | 0.0020   |      |
-|                 | Overweight   | 26937 (34.7)  | 82 (34.6)     |          |      |
-|                 | Obese        | 19463 (25.1)  | 81 (34.2)     |          |      |
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+level
+</th>
+<th style="text-align:left;">
+No
+</th>
+<th style="text-align:left;">
+Yes
+</th>
+<th style="text-align:left;">
+p
+</th>
+<th style="text-align:left;">
+test
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+n
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+77558
+</td>
+<td style="text-align:left;">
+237
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+age (mean (SD))
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+58.65 (14.28)
+</td>
+<td style="text-align:left;">
+57.33 (12.15)
+</td>
+<td style="text-align:left;">
+0.1539
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agecat (%)
+</td>
+<td style="text-align:left;">
+30-39
+</td>
+<td style="text-align:left;">
+7619 ( 9.8)
+</td>
+<td style="text-align:left;">
+14 ( 5.9)
+</td>
+<td style="text-align:left;">
+0.0218
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+40-59
+</td>
+<td style="text-align:left;">
+35187 (45.4)
+</td>
+<td style="text-align:left;">
+126 (53.2)
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+\>=60
+</td>
+<td style="text-align:left;">
+34752 (44.8)
+</td>
+<td style="text-align:left;">
+97 (40.9)
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+black (%)
+</td>
+<td style="text-align:left;">
+White
+</td>
+<td style="text-align:left;">
+56736 (73.2)
+</td>
+<td style="text-align:left;">
+140 (59.1)
+</td>
+<td style="text-align:left;">
+\<0.0001
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Black
+</td>
+<td style="text-align:left;">
+20822 (26.8)
+</td>
+<td style="text-align:left;">
+97 (40.9)
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+sex (%)
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+50322 (64.9)
+</td>
+<td style="text-align:left;">
+220 (92.8)
+</td>
+<td style="text-align:left;">
+\<0.0001
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:left;">
+27236 (35.1)
+</td>
+<td style="text-align:left;">
+17 ( 7.2)
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+smkever (%)
+</td>
+<td style="text-align:left;">
+Never
+</td>
+<td style="text-align:left;">
+61942 (79.9)
+</td>
+<td style="text-align:left;">
+173 (73.0)
+</td>
+<td style="text-align:left;">
+0.0107
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Ever
+</td>
+<td style="text-align:left;">
+15616 (20.1)
+</td>
+<td style="text-align:left;">
+64 (27.0)
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+educat3 (%)
+</td>
+<td style="text-align:left;">
+HS or less
+</td>
+<td style="text-align:left;">
+16933 (21.8)
+</td>
+<td style="text-align:left;">
+48 (20.3)
+</td>
+<td style="text-align:left;">
+0.3841
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Some college
+</td>
+<td style="text-align:left;">
+30943 (39.9)
+</td>
+<td style="text-align:left;">
+105 (44.3)
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Col grad
+</td>
+<td style="text-align:left;">
+29682 (38.3)
+</td>
+<td style="text-align:left;">
+84 (35.4)
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+vegstat3 (%)
+</td>
+<td style="text-align:left;">
+Vegetarians
+</td>
+<td style="text-align:left;">
+29782 (38.4)
+</td>
+<td style="text-align:left;">
+68 (28.7)
+</td>
+<td style="text-align:left;">
+0.0078
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Pesco
+</td>
+<td style="text-align:left;">
+7457 ( 9.6)
+</td>
+<td style="text-align:left;">
+24 (10.1)
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Non-veg
+</td>
+<td style="text-align:left;">
+40319 (52.0)
+</td>
+<td style="text-align:left;">
+145 (61.2)
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+take_vd (%)
+</td>
+<td style="text-align:left;">
+No
+</td>
+<td style="text-align:left;">
+67882 (87.5)
+</td>
+<td style="text-align:left;">
+182 (76.8)
+</td>
+<td style="text-align:left;">
+\<0.0001
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:left;">
+9676 (12.5)
+</td>
+<td style="text-align:left;">
+55 (23.2)
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+bmi (mean (SD))
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+27.22 (6.03)
+</td>
+<td style="text-align:left;">
+29.86 (9.19)
+</td>
+<td style="text-align:left;">
+\<0.0001
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+bmicat (%)
+</td>
+<td style="text-align:left;">
+Normal
+</td>
+<td style="text-align:left;">
+31158 (40.2)
+</td>
+<td style="text-align:left;">
+74 (31.2)
+</td>
+<td style="text-align:left;">
+0.0020
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Overweight
+</td>
+<td style="text-align:left;">
+26937 (34.7)
+</td>
+<td style="text-align:left;">
+82 (34.6)
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Obese
+</td>
+<td style="text-align:left;">
+19463 (25.1)
+</td>
+<td style="text-align:left;">
+81 (34.2)
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
 
 ## Logistic regression on demographics and lifestyles
 
@@ -726,4 +1137,95 @@ Observations
 <td colspan="6" style="border-bottom: 1px solid black">
 </td>
 </tr>
+</table>
+
+### Exploring interactions
+
+-   The use of vitamin D supplement was significantly associated with
+    SLE. Is there any interaction between dietary patterns and vitamin D
+    use? To explore this, the interaction term was added into the model
+    5 above.
+
+-   The interaction between dietary patterns and vitamin D use was
+    significant (*p* = 0.0139). Based on the interaction model, the
+    estimated odds ratio associated with vitamin D use was calculated
+    for each dietary pattern
+
+    -   Notice that among pesco-vegetarians the odds of SLE was 6 times
+        higher for those who use vitamin D, compared to those who don’t
+        use the supplement.
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+contrast
+</th>
+<th style="text-align:left;">
+vegstat3
+</th>
+<th style="text-align:right;">
+odds.ratio
+</th>
+<th style="text-align:right;">
+asymp.LCL
+</th>
+<th style="text-align:right;">
+asymp.UCL
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Yes / No
+</td>
+<td style="text-align:left;">
+Non-veg
+</td>
+<td style="text-align:right;">
+1.582861
+</td>
+<td style="text-align:right;">
+1.0490533
+</td>
+<td style="text-align:right;">
+2.388294
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Yes / No
+</td>
+<td style="text-align:left;">
+Vegetarians
+</td>
+<td style="text-align:right;">
+1.624738
+</td>
+<td style="text-align:right;">
+0.8992273
+</td>
+<td style="text-align:right;">
+2.935601
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Yes / No
+</td>
+<td style="text-align:left;">
+Pesco
+</td>
+<td style="text-align:right;">
+6.005771
+</td>
+<td style="text-align:right;">
+2.6832266
+</td>
+<td style="text-align:right;">
+13.442506
+</td>
+</tr>
+</tbody>
 </table>

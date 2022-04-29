@@ -2,7 +2,7 @@
 # AHS-2 lupus study
 
 # Required packages
-pacs <- c("tidyverse", "tableone")
+pacs <- c("tidyverse", "tableone", "emmeans")
 sapply(pacs, require, character.only = TRUE)
 
 # Function to search variables
@@ -120,3 +120,55 @@ stargazer::stargazer(models,
                      omit = "Constant", 
                      omit.stat = c("aic", "ll"),
                      omit.table.layout = "n")
+
+# Interaction b/w dietary pattern and vd supp use
+m6 <- update(m1, . ~ . + vegstat3 * take_vd + smkever + educat3 + bmicat)
+summary(m6)
+anova(m5, m6, test = "LRT")[2, 5]
+
+emmeans(m6, ~ take_vd | vegstat3, type = "response") %>% 
+  pairs(reverse = TRUE) %>% 
+  confint() %>% 
+  as_tibble() %>% 
+  select(-(4:5))
+
+emmeans(m6, ~ vegstat3 | take_vd, type = "response") %>% 
+  pairs(reverse = TRUE) %>% 
+  confint()
+
+calc_or <- function(model, L){
+  betas <- coef(model)
+  LB <- as.vector(L %*% betas)
+  OR <- exp(LB)
+  SE <- as.vector(sqrt(t(L) %*% vcov(model) %*% L))
+  CI <- exp(LB + qnorm(c(0.025, 0.975)) * SE)
+  c(OR = OR, lwr = CI[1], upr = CI[2])
+}
+
+# OR associated with VD supp use in vegetarians
+L <- rep(0, m6$rank)
+L[c(8, 14)] <- 1
+vege <- calc_or(m6, L)
+
+# OR associated with VD supp use in pesco
+L <- rep(0, m6$rank)
+L[c(8, 15)] <- 1
+pesco <- calc_or(m6, L)
+
+# OR associated with VD supp use in non-vegetarians (ref)
+L <- rep(0, m6$rank)
+L[8] <- 1
+nonveg <- calc_or(m6, L)
+
+# OR for vd supp use by dietary pattern
+round(rbind(vege, pesco, nonveg), 2)
+
+# OR associated with vegetarians among those who use VD supp
+L <- rep(0, m6$rank)
+L[c(6, 14)] <- 1
+vege <- calc_or(m6, L)
+
+# OR associated with pesco among those who use VD supp
+L <- rep(0, m6$rank)
+L[c(7, 15)] <- 1
+pesco <- calc_or(m6, L)

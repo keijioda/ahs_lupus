@@ -1,13 +1,14 @@
 ---
 title: "AHS-2 lupus study"
 output: github_document
+always_allow_html: true
 ---
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
 # Required packages
-pacs <- c("tidyverse", "tableone")
+pacs <- c("tidyverse", "tableone", "emmeans", "kableExtra")
 sapply(pacs, require, character.only = TRUE)
 
 # Function to search variables
@@ -80,6 +81,8 @@ levels(lupus$vegstat3) <- c("Vegetarians", "Vegetarians", "Pesco", "Non-veg", "N
 
 * Descriptive table stratified by cases/non-cases
   * Variables were categorized following the original manuscript
+  
+* I have added vitamin D supplement use (`take_vd`) in the table. Notice that use of vitamin D supplement is associated with SLE.
 
 ```{r echo = FALSE}
 
@@ -153,4 +156,23 @@ stargazer::stargazer(models,
                      omit.stat = c("aic", "ll"),
                      omit.table.layout = "n")
 
+```
+
+### Exploring interactions
+
+* The use of vitamin D supplement was significantly associated with SLE. Is there any interaction between dietary patterns and vitamin D use? To explore this, the interaction term was added into the model 5 above.
+
+```{r echo = FALSE}
+m6 <- update(m1, . ~ . + vegstat3 * take_vd + smkever + educat3 + bmicat)
+```
+
+* The interaction between dietary patterns and vitamin D use was significant (*p* = `r round(anova(m5, m6, test = "LRT")[2, 5], 4)`). Based on the interaction model, the estimated odds ratio associated with vitamin D use was calculated for each dietary pattern
+  * Notice that among pesco-vegetarians the odds of SLE was 6 times higher for those who use vitamin D, compared to those who don't use the supplement.
+
+```{r echo = FALSE}
+emmeans(m6, ~ take_vd | vegstat3, type = "response") %>% 
+  pairs(reverse = TRUE) %>% 
+  confint() %>% 
+  kable() %>% 
+  remove_column(4:5)
 ```

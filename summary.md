@@ -31,7 +31,8 @@ AHS-2 lupus study
 -   Descriptive table stratified by cases/non-cases
     -   Variables were categorized following the original manuscript
 -   I have added vitamin D supplement use (`take_vd`) in the table.
-    Notice that use of vitamin D supplement is associated with SLE.
+    Notice that use of vitamin D supplement is associated with SLE
+    (reverse-causation?).
 
 <table>
 <thead>

@@ -82,7 +82,7 @@ levels(lupus$vegstat3) <- c("Vegetarians", "Vegetarians", "Pesco", "Non-veg", "N
 * Descriptive table stratified by cases/non-cases
   * Variables were categorized following the original manuscript
   
-* I have added vitamin D supplement use (`take_vd`) in the table. Notice that use of vitamin D supplement is associated with SLE.
+* I have added vitamin D supplement use (`take_vd`) in the table. Notice that use of vitamin D supplement is associated with SLE (reverse-causation?).
 
 ```{r echo = FALSE}
 

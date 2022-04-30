@@ -177,7 +177,7 @@ emmeans(m6, ~ take_vd | vegstat3, type = "response") %>%
   as_tibble %>% select(-SE, -df) %>% mutate_at(3:5, round, 2) %>% kable()
 ```
 * similarly, the estimated ORs associated with vegetarians and pesco-vegetarians were calculated for those who use VD supplement and those who do not.
-  * Note that pesco-vegetarians have 42% lower odds of SLE compared to non-vegetarians if not taking VD supplement, but have more than twice of odds of SLE if taking VD supplement
+  * Note that pesco-vegetarians have 42% lower odds of SLE compared to non-vegetarians if not taking VD supplement, but have more than twice of odds of SLE if taking VD supplement (although non-significant)
 
 ```{r echo = FALSE}
 emmeans(m6, ~ vegstat3 | take_vd, type = "response") %>% 

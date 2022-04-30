@@ -1236,7 +1236,8 @@ Pesco
     and those who do not.
     -   Note that pesco-vegetarians have 42% lower odds of SLE compared
         to non-vegetarians if not taking VD supplement, but have more
-        than twice of odds of SLE if taking VD supplement
+        than twice of odds of SLE if taking VD supplement (although
+        non-significant)
 
 <table>
 <thead>

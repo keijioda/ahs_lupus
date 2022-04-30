@@ -89,7 +89,8 @@ levels(lupus$vegstat3) <- c("Vegetarians", "Vegetarians", "Pesco", "Non-veg", "N
 # Descriptive table
 table_vars <- c("age", "agecat", "black", "sex", "smkever", "educat3", "vegstat3", "take_vd", "bmi", "bmicat")
 lupus %>% CreateTableOne(table_vars, strata = "prev_sle", data = .) %>%
-  kableone(showAllLevels = TRUE, pDigits = 4) 
+  print(showAllLevels = TRUE, pDigits = 4)  %>% 
+  kableone()
 
 ```
 
@@ -173,6 +174,16 @@ m6 <- update(m1, . ~ . + vegstat3 * take_vd + smkever + educat3 + bmicat)
 emmeans(m6, ~ take_vd | vegstat3, type = "response") %>% 
   pairs(reverse = TRUE) %>% 
   confint() %>% 
-  kable() %>% 
-  remove_column(4:5)
+  as_tibble %>% select(-SE, -df) %>% mutate_at(3:5, round, 2) %>% kable()
 ```
+* similarly, the estimated ORs associated with vegetarians and pesco-vegetarians were calculated for those who use VD supplement and those who do not.
+  * Note that pesco-vegetarians have 42% lower odds of SLE compared to non-vegetarians if not taking VD supplement, but have more than twice of odds of SLE if taking VD supplement
+
+```{r echo = FALSE}
+emmeans(m6, ~ vegstat3 | take_vd, type = "response") %>% 
+  pairs(reverse = TRUE) %>% 
+  confint() %>% 
+  as_tibble %>% select(-SE, -df) %>%
+  mutate_at(3:5, round, 2) %>% slice(-3, -6) %>% kable()
+```
+

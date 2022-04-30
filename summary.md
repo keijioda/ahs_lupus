@@ -1185,13 +1185,13 @@ Yes / No
 Non-veg
 </td>
 <td style="text-align:right;">
-1.582861
+1.58
 </td>
 <td style="text-align:right;">
-1.0490533
+1.05
 </td>
 <td style="text-align:right;">
-2.388294
+2.39
 </td>
 </tr>
 <tr>
@@ -1202,13 +1202,13 @@ Yes / No
 Vegetarians
 </td>
 <td style="text-align:right;">
-1.624738
+1.62
 </td>
 <td style="text-align:right;">
-0.8992273
+0.90
 </td>
 <td style="text-align:right;">
-2.935601
+2.94
 </td>
 </tr>
 <tr>
@@ -1219,13 +1219,112 @@ Yes / No
 Pesco
 </td>
 <td style="text-align:right;">
-6.005771
+6.01
 </td>
 <td style="text-align:right;">
-2.6832266
+2.68
 </td>
 <td style="text-align:right;">
-13.442506
+13.44
+</td>
+</tr>
+</tbody>
+</table>
+
+-   similarly, the estimated ORs associated with vegetarians and
+    pesco-vegetarians were calculated for those who use VD supplement
+    and those who do not.
+    -   Note that pesco-vegetarians have 42% lower odds of SLE compared
+        to non-vegetarians if not taking VD supplement, but have more
+        than twice of odds of SLE if taking VD supplement
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+contrast
+</th>
+<th style="text-align:left;">
+take_vd
+</th>
+<th style="text-align:right;">
+odds.ratio
+</th>
+<th style="text-align:right;">
+asymp.LCL
+</th>
+<th style="text-align:right;">
+asymp.UCL
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Vegetarians / (Non-veg)
+</td>
+<td style="text-align:left;">
+No
+</td>
+<td style="text-align:right;">
+0.80
+</td>
+<td style="text-align:right;">
+0.53
+</td>
+<td style="text-align:right;">
+1.20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pesco / (Non-veg)
+</td>
+<td style="text-align:left;">
+No
+</td>
+<td style="text-align:right;">
+0.58
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+1.19
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Vegetarians / (Non-veg)
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:right;">
+0.82
+</td>
+<td style="text-align:right;">
+0.38
+</td>
+<td style="text-align:right;">
+1.79
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pesco / (Non-veg)
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:right;">
+2.20
+</td>
+<td style="text-align:right;">
+0.98
+</td>
+<td style="text-align:right;">
+4.98
 </td>
 </tr>
 </tbody>

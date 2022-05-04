@@ -39,6 +39,8 @@ lupus <- lupus0 %>%
     educat3 = factor(educat3, labels = c("HS or less", "Some college", "Col grad")),
     take_vd = ifelse(!is.na(vitd) & vitd == 2, 1, 0),
     take_vd = factor(take_vd, labels = c("No", "Yes")),
+    take_fo = ifelse(!is.na(fishoil) & fishoil == 2, 1, 0),
+    take_fo = factor(take_fo, labels = c("No", "Yes")),
     bmicat  = cut(bmi, breaks = c(0, 25, 30, Inf), right = FALSE),
     bmicat  = factor(bmicat, labels = c("Normal", "Overweight", "Obese")),
     vegstat = factor(vege_group_gen_bl, levels = c("vegan", "lacto", "pesco", "semi", "nonveg")),
@@ -112,9 +114,9 @@ RHS <- c("agecat", "black", "sex")
 fm <- formula(paste("prev_sle ~", paste0(RHS, collapse = " + ")))
 m1 <- glm(fm, data = lupus_md, family = "binomial")
 m2 <- update(m1, . ~ . + vegstat3)
-m3 <- update(m1, . ~ . + vegstat3 + take_vd)
-m4 <- update(m1, . ~ . + vegstat3 + take_vd + smkever + educat3)
-m5 <- update(m1, . ~ . + vegstat3 + take_vd + smkever + educat3 + bmicat)
+m3 <- update(m1, . ~ . + vegstat3 + take_vd + take_fo)
+m4 <- update(m1, . ~ . + vegstat3 + take_vd + take_fo + smkever + educat3)
+m5 <- update(m1, . ~ . + vegstat3 + take_vd + take_fo + smkever + educat3 + bmicat)
 
 models <- list(m1, m2, m3, m4, m5)
 ci <- list(exp(confint.default(m1)), 
@@ -129,6 +131,7 @@ var_labels <- c("Age.: 30-39",
                 "Diet: Vegetarians", 
                 "Diet: Pesco veg", 
                 "VitD: Use VD supp", 
+                "Foil: Use FO supp", 
                 "Smkg: Ever", 
                 "Educ: HS or less", 
                 "Educ: Some college", 

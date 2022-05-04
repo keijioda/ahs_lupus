@@ -29,441 +29,456 @@ AHS-2 lupus study
 ## Descriptive table
 
 -   Descriptive table stratified by cases/non-cases
+
     -   Variables were categorized following the original manuscript
+
 -   I have added vitamin D supplement use (`take_vd`) in the table.
     Notice that use of vitamin D supplement is associated with SLE
     (reverse-causation?).
 
-<table>
+-   I have changed column percentages to row percentages.
+
+<table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
 <thead>
 <tr>
-<th style="text-align:left;">
+<td colspan="5" style="text-align: left;">
+Table 1: Participant characteristics
+</td>
+</tr>
+<tr>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
 </th>
-<th style="text-align:left;">
-level
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+No<br /> n = 77,558
 </th>
-<th style="text-align:left;">
-No
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+Yes<br /> n = 237
 </th>
-<th style="text-align:left;">
-Yes
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+Total<br /> n = 77,795
 </th>
-<th style="text-align:left;">
-p
-</th>
-<th style="text-align:left;">
-test
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+P-value
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;">
-n
+<td style="text-align: left;">
+Age (year)
 </td>
-<td style="text-align:left;">
+<td style="text-align: center;">
+58.7 (±14.3)
 </td>
-<td style="text-align:left;">
-77558
+<td style="text-align: center;">
+57.3 (±12.1)
 </td>
-<td style="text-align:left;">
-237
+<td style="text-align: center;">
+58.6 (±14.3)
 </td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-age (mean (SD))
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-58.65 (14.28)
-</td>
-<td style="text-align:left;">
-57.33 (12.15)
-</td>
-<td style="text-align:left;">
-0.1539
-</td>
-<td style="text-align:left;">
+<td style="text-align: center;">
+0.15
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-agecat (%)
+<td colspan="4" style>
+Age group
 </td>
-<td style="text-align:left;">
-30-39
-</td>
-<td style="text-align:left;">
-7619 ( 9.8)
-</td>
-<td style="text-align:left;">
-14 ( 5.9)
-</td>
-<td style="text-align:left;">
-0.0218
-</td>
-<td style="text-align:left;">
+<td style="text-align: center;">
+0.022
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align: left;">
+  30-39
 </td>
-<td style="text-align:left;">
-40-59
+<td style="text-align: center;">
+7,619 (99.8%)
 </td>
-<td style="text-align:left;">
-35187 (45.4)
+<td style="text-align: center;">
+14 (0.2%)
 </td>
-<td style="text-align:left;">
-126 (53.2)
+<td style="text-align: center;">
+7,633 (9.8%)
 </td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-\>=60
-</td>
-<td style="text-align:left;">
-34752 (44.8)
-</td>
-<td style="text-align:left;">
-97 (40.9)
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
+<td style="text-align: center;">
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-black (%)
+<td style="text-align: left;">
+  40-59
 </td>
-<td style="text-align:left;">
-White
+<td style="text-align: center;">
+35,187 (99.6%)
 </td>
-<td style="text-align:left;">
-56736 (73.2)
+<td style="text-align: center;">
+126 (0.4%)
 </td>
-<td style="text-align:left;">
-140 (59.1)
+<td style="text-align: center;">
+35,313 (45.4%)
 </td>
-<td style="text-align:left;">
-\<0.0001
-</td>
-<td style="text-align:left;">
+<td style="text-align: center;">
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align: left;">
+  \>=60
 </td>
-<td style="text-align:left;">
-Black
+<td style="text-align: center;">
+34,752 (99.7%)
 </td>
-<td style="text-align:left;">
-20822 (26.8)
+<td style="text-align: center;">
+97 (0.3%)
 </td>
-<td style="text-align:left;">
-97 (40.9)
+<td style="text-align: center;">
+34,849 (44.8%)
 </td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-sex (%)
-</td>
-<td style="text-align:left;">
-Female
-</td>
-<td style="text-align:left;">
-50322 (64.9)
-</td>
-<td style="text-align:left;">
-220 (92.8)
-</td>
-<td style="text-align:left;">
-\<0.0001
-</td>
-<td style="text-align:left;">
+<td style="text-align: center;">
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td colspan="4" style>
+Race
 </td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:left;">
-27236 (35.1)
-</td>
-<td style="text-align:left;">
-17 ( 7.2)
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
+<td style="text-align: center;">
+\< 0.0001
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-smkever (%)
+<td style="text-align: left;">
+  White
 </td>
-<td style="text-align:left;">
-Never
+<td style="text-align: center;">
+56,736 (99.8%)
 </td>
-<td style="text-align:left;">
-61942 (79.9)
+<td style="text-align: center;">
+140 (0.2%)
 </td>
-<td style="text-align:left;">
-173 (73.0)
+<td style="text-align: center;">
+56,876 (73.1%)
 </td>
-<td style="text-align:left;">
-0.0107
-</td>
-<td style="text-align:left;">
+<td style="text-align: center;">
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align: left;">
+  Black
 </td>
-<td style="text-align:left;">
-Ever
+<td style="text-align: center;">
+20,822 (99.5%)
 </td>
-<td style="text-align:left;">
-15616 (20.1)
+<td style="text-align: center;">
+97 (0.5%)
 </td>
-<td style="text-align:left;">
-64 (27.0)
+<td style="text-align: center;">
+20,919 (26.9%)
 </td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-educat3 (%)
-</td>
-<td style="text-align:left;">
-HS or less
-</td>
-<td style="text-align:left;">
-16933 (21.8)
-</td>
-<td style="text-align:left;">
-48 (20.3)
-</td>
-<td style="text-align:left;">
-0.3841
-</td>
-<td style="text-align:left;">
+<td style="text-align: center;">
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td colspan="4" style>
+Gender
 </td>
-<td style="text-align:left;">
-Some college
-</td>
-<td style="text-align:left;">
-30943 (39.9)
-</td>
-<td style="text-align:left;">
-105 (44.3)
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
+<td style="text-align: center;">
+\< 0.0001
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align: left;">
+  Female
 </td>
-<td style="text-align:left;">
-Col grad
+<td style="text-align: center;">
+50,322 (99.6%)
 </td>
-<td style="text-align:left;">
-29682 (38.3)
+<td style="text-align: center;">
+220 (0.4%)
 </td>
-<td style="text-align:left;">
-84 (35.4)
+<td style="text-align: center;">
+50,542 (65.0%)
 </td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-vegstat3 (%)
-</td>
-<td style="text-align:left;">
-Vegetarians
-</td>
-<td style="text-align:left;">
-29782 (38.4)
-</td>
-<td style="text-align:left;">
-68 (28.7)
-</td>
-<td style="text-align:left;">
-0.0078
-</td>
-<td style="text-align:left;">
+<td style="text-align: center;">
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align: left;">
+  Male
 </td>
-<td style="text-align:left;">
-Pesco
+<td style="text-align: center;">
+27,236 (99.9%)
 </td>
-<td style="text-align:left;">
-7457 ( 9.6)
+<td style="text-align: center;">
+17 (0.1%)
 </td>
-<td style="text-align:left;">
-24 (10.1)
+<td style="text-align: center;">
+27,253 (35.0%)
 </td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-Non-veg
-</td>
-<td style="text-align:left;">
-40319 (52.0)
-</td>
-<td style="text-align:left;">
-145 (61.2)
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
+<td style="text-align: center;">
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-take_vd (%)
+<td colspan="4" style>
+Smoking
 </td>
-<td style="text-align:left;">
-No
-</td>
-<td style="text-align:left;">
-67882 (87.5)
-</td>
-<td style="text-align:left;">
-182 (76.8)
-</td>
-<td style="text-align:left;">
-\<0.0001
-</td>
-<td style="text-align:left;">
+<td style="text-align: center;">
+0.011
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align: left;">
+  Never
 </td>
-<td style="text-align:left;">
-Yes
+<td style="text-align: center;">
+61,942 (99.7%)
 </td>
-<td style="text-align:left;">
-9676 (12.5)
+<td style="text-align: center;">
+173 (0.3%)
 </td>
-<td style="text-align:left;">
-55 (23.2)
+<td style="text-align: center;">
+62,115 (79.8%)
 </td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-bmi (mean (SD))
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-27.22 (6.03)
-</td>
-<td style="text-align:left;">
-29.86 (9.19)
-</td>
-<td style="text-align:left;">
-\<0.0001
-</td>
-<td style="text-align:left;">
+<td style="text-align: center;">
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-bmicat (%)
+<td style="text-align: left;">
+  Ever
 </td>
-<td style="text-align:left;">
-Normal
+<td style="text-align: center;">
+15,616 (99.6%)
 </td>
-<td style="text-align:left;">
-31158 (40.2)
+<td style="text-align: center;">
+64 (0.4%)
 </td>
-<td style="text-align:left;">
-74 (31.2)
+<td style="text-align: center;">
+15,680 (20.2%)
 </td>
-<td style="text-align:left;">
-0.0020
-</td>
-<td style="text-align:left;">
+<td style="text-align: center;">
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td colspan="4" style>
+Education
 </td>
-<td style="text-align:left;">
-Overweight
-</td>
-<td style="text-align:left;">
-26937 (34.7)
-</td>
-<td style="text-align:left;">
-82 (34.6)
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
+<td style="text-align: center;">
+0.38
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align: left;">
+  HS or less
 </td>
-<td style="text-align:left;">
-Obese
+<td style="text-align: center;">
+16,933 (99.7%)
 </td>
-<td style="text-align:left;">
-19463 (25.1)
+<td style="text-align: center;">
+48 (0.3%)
 </td>
-<td style="text-align:left;">
-81 (34.2)
+<td style="text-align: center;">
+16,981 (21.8%)
 </td>
-<td style="text-align:left;">
+<td style="text-align: center;">
 </td>
-<td style="text-align:left;">
+</tr>
+<tr>
+<td style="text-align: left;">
+  Some college
+</td>
+<td style="text-align: center;">
+30,943 (99.7%)
+</td>
+<td style="text-align: center;">
+105 (0.3%)
+</td>
+<td style="text-align: center;">
+31,048 (39.9%)
+</td>
+<td style="text-align: center;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+  Col grad
+</td>
+<td style="text-align: center;">
+29,682 (99.7%)
+</td>
+<td style="text-align: center;">
+84 (0.3%)
+</td>
+<td style="text-align: center;">
+29,766 (38.3%)
+</td>
+<td style="text-align: center;">
+</td>
+</tr>
+<tr>
+<td colspan="4" style>
+Dietary pattern
+</td>
+<td style="text-align: center;">
+0.008
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+  Vegetarians
+</td>
+<td style="text-align: center;">
+29,782 (99.8%)
+</td>
+<td style="text-align: center;">
+68 (0.2%)
+</td>
+<td style="text-align: center;">
+29,850 (38.4%)
+</td>
+<td style="text-align: center;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+  Pesco
+</td>
+<td style="text-align: center;">
+7,457 (99.7%)
+</td>
+<td style="text-align: center;">
+24 (0.3%)
+</td>
+<td style="text-align: center;">
+7,481 (9.6%)
+</td>
+<td style="text-align: center;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+  Non-veg
+</td>
+<td style="text-align: center;">
+40,319 (99.6%)
+</td>
+<td style="text-align: center;">
+145 (0.4%)
+</td>
+<td style="text-align: center;">
+40,464 (52.0%)
+</td>
+<td style="text-align: center;">
+</td>
+</tr>
+<tr>
+<td colspan="4" style>
+Use of vit D supp
+</td>
+<td style="text-align: center;">
+\< 0.0001
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+  No
+</td>
+<td style="text-align: center;">
+67,882 (99.7%)
+</td>
+<td style="text-align: center;">
+182 (0.3%)
+</td>
+<td style="text-align: center;">
+68,064 (87.5%)
+</td>
+<td style="text-align: center;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+  Yes
+</td>
+<td style="text-align: center;">
+9,676 (99.4%)
+</td>
+<td style="text-align: center;">
+55 (0.6%)
+</td>
+<td style="text-align: center;">
+9,731 (12.5%)
+</td>
+<td style="text-align: center;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+BMI (kg/m&sup2)
+</td>
+<td style="text-align: center;">
+27.2 (±6.0)
+</td>
+<td style="text-align: center;">
+29.9 (±9.2)
+</td>
+<td style="text-align: center;">
+27.2 (±6.0)
+</td>
+<td style="text-align: center;">
+\< 0.0001
+</td>
+</tr>
+<tr>
+<td colspan="4" style>
+BMI category
+</td>
+<td style="text-align: center;">
+0.002
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+  Normal
+</td>
+<td style="text-align: center;">
+31,158 (99.8%)
+</td>
+<td style="text-align: center;">
+74 (0.2%)
+</td>
+<td style="text-align: center;">
+31,232 (40.1%)
+</td>
+<td style="text-align: center;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+  Overweight
+</td>
+<td style="text-align: center;">
+26,937 (99.7%)
+</td>
+<td style="text-align: center;">
+82 (0.3%)
+</td>
+<td style="text-align: center;">
+27,019 (34.7%)
+</td>
+<td style="text-align: center;">
+</td>
+</tr>
+<tr>
+<td style="border-bottom: 2px solid grey; text-align: left;">
+  Obese
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+19,463 (99.6%)
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+81 (0.4%)
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+19,544 (25.1%)
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
 </td>
 </tr>
 </tbody>

@@ -61,8 +61,36 @@ table_vars <- c("age", "agecat", "black", "sex", "smkever", "educat3", "vegstat3
 lupus %>% CreateTableOne(table_vars, strata = "prev_sle", data = .) %>%
   print(showAllLevels = TRUE)
 
-lupus %>% search_var("vitd")
-lupus %>% count(vitd)
+# Using Gmisc package
+library(Gmisc)
+
+getTable1Stats <- function(x, digits = 1, statistics = getPvalChiSq, ...){
+  getDescriptionStatsBy(x = lupus[[x]], 
+                        by = lupus$prev_sle,
+                        digits = digits,
+                        header_count = "n = %s",
+                        add_total_col = "last",
+                        statistics = statistics,
+                        hrzl_prop = TRUE, 
+                        ...)
+}
+
+t1 <- list()
+t1[["Age (year)"]]        <- getTable1Stats("age", statistics = getPvalAnova)
+t1[["Age group"]]         <- getTable1Stats("agecat")
+t1[["Race"]]              <- getTable1Stats("black")
+t1[["Gender"]]            <- getTable1Stats("sex")
+t1[["Smoking"]]           <- getTable1Stats("smkever")
+t1[["Education"]]         <- getTable1Stats("educat3")
+t1[["Dietary pattern"]]   <- getTable1Stats("vegstat3")
+t1[["Use of vit D supp"]] <- getTable1Stats("take_vd")
+t1[["BMI (kg/m&sup2)"]]   <- getTable1Stats("bmi", statistics = getPvalAnova)
+t1[["BMI category"]]      <- getTable1Stats("bmicat")
+
+mergeDesc(t1,
+          htmlTable_args = list(css.rgroup = "",
+                                caption  = "Table 1: Participant characteristics")
+)
 
 # Logistic regression
 

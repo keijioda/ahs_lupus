@@ -42,11 +42,12 @@ lupus <- lupus0 %>%
     educat3 = factor(educat3, labels = c("HS or less", "Some college", "Col grad")),
     take_vd = ifelse(!is.na(vitd) & vitd == 2, 1, 0),
     take_vd = factor(take_vd, labels = c("No", "Yes")),
+    take_fo = ifelse(!is.na(fishoil) & fishoil == 2, 1, 0),
+    take_fo = factor(take_fo, labels = c("No", "Yes")),
     bmicat  = cut(bmi, breaks = c(0, 25, 30, Inf), right = FALSE),
     bmicat  = factor(bmicat, labels = c("Normal", "Overweight", "Obese")),
     vegstat = factor(vege_group_gen_bl, levels = c("vegan", "lacto", "pesco", "semi", "nonveg")),
     vegstat3 = vegstat,
-    # prev_sle = ifelse((!is.na(sley) & sley > 0) | (!is.na(sle) & sle == 2), 1, 0),
     prev_sle = ifelse(!is.na(sle) & sle == 2, 1, 0),
     prev_sle = factor(prev_sle, labels = c("No", "Yes"))) %>% 
   drop_na(sex, age, black, vege_group_gen_bl, smkever, educat3, bmi) %>% 
@@ -81,11 +82,10 @@ levels(lupus$vegstat3) <- c("Vegetarians", "Vegetarians", "Pesco", "Non-veg", "N
 
 * Descriptive table stratified by cases/non-cases
   * Variables were categorized following the original manuscript
-  
-* I have added vitamin D supplement use (`take_vd`) in the table. Notice that use of vitamin D supplement is associated with SLE (reverse-causation?).
+  * Notice that use of vitamin D or fish oil supplement is associated with SLE (reverse-causation?).
 
 ```{r echo = FALSE}
-table_vars <- c("age", "agecat", "black", "sex", "smkever", "educat3", "vegstat3", "take_vd", "bmi", "bmicat")
+table_vars <- c("age", "agecat", "black", "sex", "smkever", "educat3", "vegstat3", "take_vd", "take_fo", "bmi", "bmicat")
 lupus %>% CreateTableOne(table_vars, strata = "prev_sle", data = .) %>%
   print(showAllLevels = TRUE) %>% 
   kableone()
@@ -96,9 +96,9 @@ lupus %>% CreateTableOne(table_vars, strata = "prev_sle", data = .) %>%
 * Four logistic models were fitted using prevalent SLE as the outcome.
   * Model 1 includes: age, race and gender
   * Model 2 adds dietary patterns
-  * Model 3 further adds vitamin D supplement use
-  * Model 4 further adds smoking history and education levels
-  * Model 5 further adds BMI categories
+  * Model 3 further adds education levels
+  * Model 4 further adds smoking history
+  * Model 5 further adds BMI categories and energy intake (kcal as continuous)
   * (I have changed references in some variables)
 
 * The table below shows estimated odds ratios and 95% Wald confidence intervals from each logistic model:
@@ -107,19 +107,21 @@ lupus %>% CreateTableOne(table_vars, strata = "prev_sle", data = .) %>%
 # Logistic regression
 
 # Change references
-lupus_md <- lupus
+lupus_md <- lupus %>% 
+  mutate(kcal100 = kcal / 100)
 lupus_md$vegstat3 <- relevel(lupus_md$vegstat3, ref = "Non-veg")
 lupus_md$educat3 <- relevel(lupus_md$educat3, ref = "Col grad")
 lupus_md$agecat <- relevel(lupus_md$agecat, ref = ">=60")
+
 
 
 RHS <- c("agecat", "black", "sex")
 fm <- formula(paste("prev_sle ~", paste0(RHS, collapse = " + ")))
 m1 <- glm(fm, data = lupus_md, family = "binomial")
 m2 <- update(m1, . ~ . + vegstat3)
-m3 <- update(m1, . ~ . + vegstat3 + take_vd)
-m4 <- update(m1, . ~ . + vegstat3 + take_vd + smkever + educat3)
-m5 <- update(m1, . ~ . + vegstat3 + take_vd + smkever + educat3 + bmicat)
+m3 <- update(m1, . ~ . + vegstat3 + educat3)
+m4 <- update(m1, . ~ . + vegstat3 + educat3 + smkever)
+m5 <- update(m1, . ~ . + vegstat3 + educat3 + smkever + bmicat + kcal100)
 
 models <- list(m1, m2, m3, m4, m5)
 ci <- list(exp(confint.default(m1)), 
@@ -133,12 +135,12 @@ var_labels <- c("Age.: 30-39",
                 "Sex.: Male", 
                 "Diet: Vegetarians", 
                 "Diet: Pesco veg", 
-                "VitD: Use VD supp", 
+                "Educ: HS or less",
+                "Educ: Some college",
                 "Smkg: Ever", 
-                "Educ: HS or less", 
-                "Educ: Some college", 
-                "BMI.: Overweight", 
-                "BMI.: Obese")
+                "BMI.: Overweight",
+                "BMI.: Obese",
+                "Kcal / 100")
 stargazer::stargazer(models, 
                      type = "html", 
                      digits = 2,
@@ -153,34 +155,4 @@ stargazer::stargazer(models,
                      omit = "Constant", 
                      omit.stat = c("aic", "ll"),
                      omit.table.layout = "n")
-
 ```
-
-### Exploring interactions
-
-* The use of vitamin D supplement was significantly associated with SLE. Is there any interaction between dietary patterns and vitamin D use? To explore this, the interaction term was added into the model 5 above.
-
-```{r echo = FALSE}
-m6 <- update(m1, . ~ . + vegstat3 * take_vd + smkever + educat3 + bmicat)
-```
-
-* The interaction between dietary patterns and vitamin D use was significant (*p* = `r round(anova(m5, m6, test = "LRT")[2, 5], 4)`). Based on the interaction model, the estimated odds ratio associated with vitamin D use was calculated for each dietary pattern
-  * Notice that among pesco-vegetarians the odds of SLE was 6 times higher for those who use vitamin D, compared to those who don't use the supplement.
-
-```{r echo = FALSE}
-emmeans(m6, ~ take_vd | vegstat3, type = "response") %>% 
-  pairs(reverse = TRUE) %>% 
-  confint() %>% 
-  as_tibble %>% select(-SE, -df) %>% mutate_at(3:5, round, 2) %>% kable()
-```
-* similarly, the estimated ORs associated with vegetarians and pesco-vegetarians were calculated for those who use VD supplement and those who do not.
-  * Note that pesco-vegetarians have 42% lower odds of SLE compared to non-vegetarians if not taking VD supplement, but have more than twice of odds of SLE if taking VD supplement (although non-significant)
-
-```{r echo = FALSE}
-emmeans(m6, ~ vegstat3 | take_vd, type = "response") %>% 
-  pairs(reverse = TRUE) %>% 
-  confint() %>% 
-  as_tibble %>% select(-SE, -df) %>%
-  mutate_at(3:5, round, 2) %>% slice(-3, -6) %>% kable()
-```
-

@@ -45,7 +45,6 @@ lupus <- lupus0 %>%
     bmicat  = factor(bmicat, labels = c("Normal", "Overweight", "Obese")),
     vegstat = factor(vege_group_gen_bl, levels = c("vegan", "lacto", "pesco", "semi", "nonveg")),
     vegstat3 = vegstat,
-    # prev_sle = ifelse((!is.na(sley) & sley > 0) | (!is.na(sle) & sle == 2), 1, 0),
     prev_sle = ifelse(!is.na(sle) & sle == 2, 1, 0),
     prev_sle = factor(prev_sle, labels = c("No", "Yes"))) %>% 
   drop_na(sex, age, black, vege_group_gen_bl, smkever, educat3, bmi) %>% 
@@ -59,7 +58,7 @@ dim(lupus)
 lupus %>% count(prev_sle) %>% mutate(pct = n / sum(n) * 100)
 
 # Descriptive table
-table_vars <- c("age", "agecat", "black", "sex", "smkever", "educat3", "vegstat3", "take_vd", "bmi", "bmicat")
+table_vars <- c("age", "agecat", "black", "sex", "smkever", "educat3", "vegstat3", "take_vd", "take_fo", "bmi", "bmicat")
 lupus %>% CreateTableOne(table_vars, strata = "prev_sle", data = .) %>%
   print(showAllLevels = TRUE)
 
@@ -97,7 +96,8 @@ mergeDesc(t1,
 # Logistic regression
 
 # Change references
-lupus_md <- lupus
+lupus_md <- lupus %>% 
+  mutate(kcal100 = kcal / 100)
 lupus_md$vegstat3 <- relevel(lupus_md$vegstat3, ref = "Non-veg")
 lupus_md$educat3 <- relevel(lupus_md$educat3, ref = "Col grad")
 lupus_md$agecat <- relevel(lupus_md$agecat, ref = ">=60")
@@ -114,9 +114,9 @@ RHS <- c("agecat", "black", "sex")
 fm <- formula(paste("prev_sle ~", paste0(RHS, collapse = " + ")))
 m1 <- glm(fm, data = lupus_md, family = "binomial")
 m2 <- update(m1, . ~ . + vegstat3)
-m3 <- update(m1, . ~ . + vegstat3 + take_vd + take_fo)
-m4 <- update(m1, . ~ . + vegstat3 + take_vd + take_fo + smkever + educat3)
-m5 <- update(m1, . ~ . + vegstat3 + take_vd + take_fo + smkever + educat3 + bmicat)
+m3 <- update(m1, . ~ . + vegstat3 + educat3)
+m4 <- update(m1, . ~ . + vegstat3 + educat3 + smkever)
+m5 <- update(m1, . ~ . + vegstat3 + educat3 + smkever + bmicat + kcal100)
 
 models <- list(m1, m2, m3, m4, m5)
 ci <- list(exp(confint.default(m1)), 
@@ -130,13 +130,12 @@ var_labels <- c("Age.: 30-39",
                 "Sex.: Male", 
                 "Diet: Vegetarians", 
                 "Diet: Pesco veg", 
-                "VitD: Use VD supp", 
-                "Foil: Use FO supp", 
+                "Educ: HS or less",
+                "Educ: Some college",
                 "Smkg: Ever", 
-                "Educ: HS or less", 
-                "Educ: Some college", 
-                "BMI.: Overweight", 
-                "BMI.: Obese")
+                "BMI.: Overweight",
+                "BMI.: Obese",
+                "Kcal / 100")
 stargazer::stargazer(models, 
                      type = "text", 
                      digits = 2,
@@ -152,54 +151,56 @@ stargazer::stargazer(models,
                      omit.stat = c("aic", "ll"),
                      omit.table.layout = "n")
 
+lupus %>% filter(prev_sle == "Yes") %>% select(fishoily, sley) %>% table()
+
 # Interaction b/w dietary pattern and vd supp use
-m6 <- update(m1, . ~ . + vegstat3 * take_vd + smkever + educat3 + bmicat)
-summary(m6)
-anova(m5, m6, test = "LRT")[2, 5]
-
-emmeans(m6, ~ take_vd | vegstat3, type = "response") %>% 
-  pairs(reverse = TRUE) %>% 
-  confint() %>% 
-  as_tibble() %>% 
-  select(-(4:5))
-
-emmeans(m6, ~ vegstat3 | take_vd, type = "response") %>% 
-  pairs(reverse = TRUE) %>% 
-  confint()
-
-calc_or <- function(model, L){
-  betas <- coef(model)
-  LB <- as.vector(L %*% betas)
-  OR <- exp(LB)
-  SE <- as.vector(sqrt(t(L) %*% vcov(model) %*% L))
-  CI <- exp(LB + qnorm(c(0.025, 0.975)) * SE)
-  c(OR = OR, lwr = CI[1], upr = CI[2])
-}
-
-# OR associated with VD supp use in vegetarians
-L <- rep(0, m6$rank)
-L[c(8, 14)] <- 1
-vege <- calc_or(m6, L)
-
-# OR associated with VD supp use in pesco
-L <- rep(0, m6$rank)
-L[c(8, 15)] <- 1
-pesco <- calc_or(m6, L)
-
-# OR associated with VD supp use in non-vegetarians (ref)
-L <- rep(0, m6$rank)
-L[8] <- 1
-nonveg <- calc_or(m6, L)
-
-# OR for vd supp use by dietary pattern
-round(rbind(vege, pesco, nonveg), 2)
-
-# OR associated with vegetarians among those who use VD supp
-L <- rep(0, m6$rank)
-L[c(6, 14)] <- 1
-vege <- calc_or(m6, L)
-
-# OR associated with pesco among those who use VD supp
-L <- rep(0, m6$rank)
-L[c(7, 15)] <- 1
-pesco <- calc_or(m6, L)
+# m6 <- update(m1, . ~ . + vegstat3 * take_vd + smkever + educat3 + bmicat)
+# summary(m6)
+# anova(m5, m6, test = "LRT")[2, 5]
+# 
+# emmeans(m6, ~ take_vd | vegstat3, type = "response") %>% 
+#   pairs(reverse = TRUE) %>% 
+#   confint() %>% 
+#   as_tibble() %>% 
+#   select(-(4:5))
+# 
+# emmeans(m6, ~ vegstat3 | take_vd, type = "response") %>% 
+#   pairs(reverse = TRUE) %>% 
+#   confint()
+# 
+# calc_or <- function(model, L){
+#   betas <- coef(model)
+#   LB <- as.vector(L %*% betas)
+#   OR <- exp(LB)
+#   SE <- as.vector(sqrt(t(L) %*% vcov(model) %*% L))
+#   CI <- exp(LB + qnorm(c(0.025, 0.975)) * SE)
+#   c(OR = OR, lwr = CI[1], upr = CI[2])
+# }
+# 
+# # OR associated with VD supp use in vegetarians
+# L <- rep(0, m6$rank)
+# L[c(8, 14)] <- 1
+# vege <- calc_or(m6, L)
+# 
+# # OR associated with VD supp use in pesco
+# L <- rep(0, m6$rank)
+# L[c(8, 15)] <- 1
+# pesco <- calc_or(m6, L)
+# 
+# # OR associated with VD supp use in non-vegetarians (ref)
+# L <- rep(0, m6$rank)
+# L[8] <- 1
+# nonveg <- calc_or(m6, L)
+# 
+# # OR for vd supp use by dietary pattern
+# round(rbind(vege, pesco, nonveg), 2)
+# 
+# # OR associated with vegetarians among those who use VD supp
+# L <- rep(0, m6$rank)
+# L[c(6, 14)] <- 1
+# vege <- calc_or(m6, L)
+# 
+# # OR associated with pesco among those who use VD supp
+# L <- rep(0, m6$rank)
+# L[c(7, 15)] <- 1
+# pesco <- calc_or(m6, L)

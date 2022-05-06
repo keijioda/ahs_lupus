@@ -30,9 +30,8 @@ AHS-2 lupus study
 
 -   Descriptive table stratified by cases/non-cases
     -   Variables were categorized following the original manuscript
--   I have added vitamin D supplement use (`take_vd`) in the table.
-    Notice that use of vitamin D supplement is associated with SLE
-    (reverse-causation?).
+    -   Notice that use of vitamin D or fish oil supplement is
+        associated with SLE (reverse-causation?).
 
 <table>
 <thead>
@@ -397,6 +396,42 @@ Yes
 </tr>
 <tr>
 <td style="text-align:left;">
+take_fo (%)
+</td>
+<td style="text-align:left;">
+No
+</td>
+<td style="text-align:left;">
+69406 (89.5)
+</td>
+<td style="text-align:left;">
+191 (80.6)
+</td>
+<td style="text-align:left;">
+\<0.001
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:left;">
+8152 (10.5)
+</td>
+<td style="text-align:left;">
+46 (19.4)
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 bmi (mean (SD))
 </td>
 <td style="text-align:left;">
@@ -474,9 +509,10 @@ Obese
 -   Four logistic models were fitted using prevalent SLE as the outcome.
     -   Model 1 includes: age, race and gender
     -   Model 2 adds dietary patterns
-    -   Model 3 further adds vitamin D supplement use
-    -   Model 4 further adds smoking history and education levels
-    -   Model 5 further adds BMI categories
+    -   Model 3 further adds education levels
+    -   Model 4 further adds smoking history
+    -   Model 5 further adds BMI categories and energy intake (kcal as
+        continuous)
     -   (I have changed references in some variables)
 -   The table below shows estimated odds ratios and 95% Wald confidence
     intervals from each logistic model:
@@ -527,13 +563,13 @@ Age.: 30-39
 0.52
 </td>
 <td>
-0.57
+0.50
 </td>
 <td>
-0.56
+0.51
 </td>
 <td>
-0.57
+0.52
 </td>
 </tr>
 <tr>
@@ -546,13 +582,13 @@ Age.: 30-39
 (0.30, 0.92)
 </td>
 <td>
-(0.32, 1.00)
+(0.28, 0.88)
 </td>
 <td>
-(0.31, 0.99)
+(0.29, 0.90)
 </td>
 <td>
-(0.32, 1.02)
+(0.30, 0.93)
 </td>
 </tr>
 <tr>
@@ -580,13 +616,13 @@ Age.: 40-59
 1.14
 </td>
 <td>
-1.19
+1.10
 </td>
 <td>
-1.13
+1.08
 </td>
 <td>
-1.13
+1.08
 </td>
 </tr>
 <tr>
@@ -599,13 +635,13 @@ Age.: 40-59
 (0.87, 1.49)
 </td>
 <td>
-(0.91, 1.56)
+(0.83, 1.45)
 </td>
 <td>
-(0.86, 1.49)
+(0.82, 1.42)
 </td>
 <td>
-(0.86, 1.49)
+(0.82, 1.42)
 </td>
 </tr>
 <tr>
@@ -633,13 +669,13 @@ Race: Black
 1.67
 </td>
 <td>
-1.72
+1.68
 </td>
 <td>
-1.73
+1.69
 </td>
 <td>
-1.66
+1.62
 </td>
 </tr>
 <tr>
@@ -652,13 +688,13 @@ Race: Black
 (1.27, 2.20)
 </td>
 <td>
-(1.31, 2.26)
+(1.28, 2.20)
 </td>
 <td>
-(1.32, 2.27)
+(1.29, 2.21)
 </td>
 <td>
-(1.26, 2.18)
+(1.23, 2.13)
 </td>
 </tr>
 <tr>
@@ -686,7 +722,7 @@ Sex.: Male
 0.15
 </td>
 <td>
-0.16
+0.15
 </td>
 <td>
 0.14
@@ -705,13 +741,13 @@ Sex.: Male
 (0.09, 0.24)
 </td>
 <td>
-(0.10, 0.26)
-</td>
-<td>
 (0.09, 0.24)
 </td>
 <td>
-(0.09, 0.24)
+(0.08, 0.22)
+</td>
+<td>
+(0.08, 0.22)
 </td>
 </tr>
 <tr>
@@ -738,13 +774,13 @@ Diet: Vegetarians
 0.73
 </td>
 <td>
-0.73
+0.71
 </td>
 <td>
-0.76
+0.75
 </td>
 <td>
-0.80
+0.79
 </td>
 </tr>
 <tr>
@@ -756,13 +792,13 @@ Diet: Vegetarians
 (0.54, 0.98)
 </td>
 <td>
-(0.54, 0.98)
+(0.52, 0.95)
 </td>
 <td>
-(0.56, 1.03)
+(0.56, 1.02)
 </td>
 <td>
-(0.59, 1.09)
+(0.58, 1.08)
 </td>
 </tr>
 <tr>
@@ -789,10 +825,10 @@ Diet: Pesco veg
 0.85
 </td>
 <td>
-0.85
+0.84
 </td>
 <td>
-0.87
+0.88
 </td>
 <td>
 0.92
@@ -807,10 +843,10 @@ Diet: Pesco veg
 (0.55, 1.32)
 </td>
 <td>
-(0.55, 1.31)
+(0.54, 1.30)
 </td>
 <td>
-(0.57, 1.35)
+(0.57, 1.36)
 </td>
 <td>
 (0.59, 1.42)
@@ -832,20 +868,20 @@ Diet: Pesco veg
 </tr>
 <tr>
 <td style="text-align:left">
-VitD: Use VD supp
+Educ: HS or less
 </td>
 <td>
 </td>
 <td>
 </td>
 <td>
-1.90
+0.80
 </td>
 <td>
-1.88
+0.72
 </td>
 <td>
-1.90
+0.70
 </td>
 </tr>
 <tr>
@@ -856,13 +892,62 @@ VitD: Use VD supp
 <td>
 </td>
 <td>
-(1.40, 2.58)
+(0.55, 1.15)
 </td>
 <td>
-(1.38, 2.55)
+(0.49, 1.04)
 </td>
 <td>
-(1.40, 2.58)
+(0.48, 1.02)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Educ: Some college
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+0.94
+</td>
+<td>
+0.87
+</td>
+<td>
+0.86
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(0.70, 1.26)
+</td>
+<td>
+(0.65, 1.17)
+</td>
+<td>
+(0.64, 1.16)
 </td>
 </tr>
 <tr>
@@ -890,10 +975,10 @@ Smkg: Ever
 <td>
 </td>
 <td>
-1.70
+1.71
 </td>
 <td>
-1.67
+1.68
 </td>
 </tr>
 <tr>
@@ -906,104 +991,10 @@ Smkg: Ever
 <td>
 </td>
 <td>
-(1.26, 2.30)
+(1.27, 2.31)
 </td>
 <td>
-(1.24, 2.25)
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-</td>
-<td>
-</td>
-<td>
-</td>
-<td>
-</td>
-<td>
-</td>
-<td>
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-Educ: HS or less
-</td>
-<td>
-</td>
-<td>
-</td>
-<td>
-</td>
-<td>
-0.73
-</td>
-<td>
-0.72
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-</td>
-<td>
-</td>
-<td>
-</td>
-<td>
-</td>
-<td>
-(0.50, 1.06)
-</td>
-<td>
-(0.49, 1.04)
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-</td>
-<td>
-</td>
-<td>
-</td>
-<td>
-</td>
-<td>
-</td>
-<td>
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-Educ: Some college
-</td>
-<td>
-</td>
-<td>
-</td>
-<td>
-</td>
-<td>
-0.87
-</td>
-<td>
-0.86
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-</td>
-<td>
-</td>
-<td>
-</td>
-<td>
-</td>
-<td>
-(0.65, 1.17)
-</td>
-<td>
-(0.64, 1.15)
+(1.25, 2.27)
 </td>
 </tr>
 <tr>
@@ -1033,7 +1024,7 @@ BMI.: Overweight
 <td>
 </td>
 <td>
-1.30
+1.29
 </td>
 </tr>
 <tr>
@@ -1048,7 +1039,7 @@ BMI.: Overweight
 <td>
 </td>
 <td>
-(0.94, 1.79)
+(0.93, 1.78)
 </td>
 </tr>
 <tr>
@@ -1078,7 +1069,7 @@ BMI.: Obese
 <td>
 </td>
 <td>
-1.36
+1.32
 </td>
 </tr>
 <tr>
@@ -1093,7 +1084,52 @@ BMI.: Obese
 <td>
 </td>
 <td>
-(0.98, 1.90)
+(0.95, 1.85)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Kcal / 100
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+1.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(0.98, 1.02)
 </td>
 </tr>
 <tr>
@@ -1138,195 +1174,4 @@ Observations
 <td colspan="6" style="border-bottom: 1px solid black">
 </td>
 </tr>
-</table>
-
-### Exploring interactions
-
--   The use of vitamin D supplement was significantly associated with
-    SLE. Is there any interaction between dietary patterns and vitamin D
-    use? To explore this, the interaction term was added into the model
-    5 above.
-
--   The interaction between dietary patterns and vitamin D use was
-    significant (*p* = 0.0139). Based on the interaction model, the
-    estimated odds ratio associated with vitamin D use was calculated
-    for each dietary pattern
-
-    -   Notice that among pesco-vegetarians the odds of SLE was 6 times
-        higher for those who use vitamin D, compared to those who don’t
-        use the supplement.
-
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-contrast
-</th>
-<th style="text-align:left;">
-vegstat3
-</th>
-<th style="text-align:right;">
-odds.ratio
-</th>
-<th style="text-align:right;">
-asymp.LCL
-</th>
-<th style="text-align:right;">
-asymp.UCL
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Yes / No
-</td>
-<td style="text-align:left;">
-Non-veg
-</td>
-<td style="text-align:right;">
-1.58
-</td>
-<td style="text-align:right;">
-1.05
-</td>
-<td style="text-align:right;">
-2.39
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Yes / No
-</td>
-<td style="text-align:left;">
-Vegetarians
-</td>
-<td style="text-align:right;">
-1.62
-</td>
-<td style="text-align:right;">
-0.90
-</td>
-<td style="text-align:right;">
-2.94
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Yes / No
-</td>
-<td style="text-align:left;">
-Pesco
-</td>
-<td style="text-align:right;">
-6.01
-</td>
-<td style="text-align:right;">
-2.68
-</td>
-<td style="text-align:right;">
-13.44
-</td>
-</tr>
-</tbody>
-</table>
-
--   similarly, the estimated ORs associated with vegetarians and
-    pesco-vegetarians were calculated for those who use VD supplement
-    and those who do not.
-    -   Note that pesco-vegetarians have 42% lower odds of SLE compared
-        to non-vegetarians if not taking VD supplement, but have more
-        than twice of odds of SLE if taking VD supplement (although
-        non-significant)
-
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-contrast
-</th>
-<th style="text-align:left;">
-take_vd
-</th>
-<th style="text-align:right;">
-odds.ratio
-</th>
-<th style="text-align:right;">
-asymp.LCL
-</th>
-<th style="text-align:right;">
-asymp.UCL
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Vegetarians / (Non-veg)
-</td>
-<td style="text-align:left;">
-No
-</td>
-<td style="text-align:right;">
-0.80
-</td>
-<td style="text-align:right;">
-0.53
-</td>
-<td style="text-align:right;">
-1.20
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Pesco / (Non-veg)
-</td>
-<td style="text-align:left;">
-No
-</td>
-<td style="text-align:right;">
-0.58
-</td>
-<td style="text-align:right;">
-0.28
-</td>
-<td style="text-align:right;">
-1.19
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Vegetarians / (Non-veg)
-</td>
-<td style="text-align:left;">
-Yes
-</td>
-<td style="text-align:right;">
-0.82
-</td>
-<td style="text-align:right;">
-0.38
-</td>
-<td style="text-align:right;">
-1.79
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Pesco / (Non-veg)
-</td>
-<td style="text-align:left;">
-Yes
-</td>
-<td style="text-align:right;">
-2.20
-</td>
-<td style="text-align:right;">
-0.98
-</td>
-<td style="text-align:right;">
-4.98
-</td>
-</tr>
-</tbody>
 </table>

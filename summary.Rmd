@@ -87,13 +87,13 @@ levels(lupus$vegstat3) <- c("Vegetarians", "Vegetarians", "Pesco", "Non-veg", "N
 ```{r echo = FALSE}
 table_vars <- c("age", "agecat", "black", "sex", "smkever", "educat3", "vegstat3", "take_vd", "take_fo", "bmi", "bmicat")
 lupus %>% CreateTableOne(table_vars, strata = "prev_sle", data = .) %>%
-  print(showAllLevels = TRUE) %>% 
+  print(showAllLevels = TRUE, pDigits = 4) %>% 
   kableone()
 ```
 
 ## Logistic regression on demographics and lifestyles
 
-* Four logistic models were fitted using prevalent SLE as the outcome.
+* Five logistic models were fitted using prevalent SLE as the outcome.
   * Model 1 includes: age, race and gender
   * Model 2 adds dietary patterns
   * Model 3 further adds education levels
@@ -112,8 +112,6 @@ lupus_md <- lupus %>%
 lupus_md$vegstat3 <- relevel(lupus_md$vegstat3, ref = "Non-veg")
 lupus_md$educat3 <- relevel(lupus_md$educat3, ref = "Col grad")
 lupus_md$agecat <- relevel(lupus_md$agecat, ref = ">=60")
-
-
 
 RHS <- c("agecat", "black", "sex")
 fm <- formula(paste("prev_sle ~", paste0(RHS, collapse = " + ")))
@@ -156,3 +154,94 @@ stargazer::stargazer(models,
                      omit.stat = c("aic", "ll"),
                      omit.table.layout = "n")
 ```
+
+## Examining the effect of menopausal status
+
+* Menopausal status by case/non-case among women:
+  * Note that the menopausal status is based on AHS-2 derived variable of "total menopause" (``mtot``).
+  * Post-menopausal women were associated with prevalent cases of SLE.
+
+```{r echo = FALSE}
+# Compare proportions by SLE only among females
+lupus %>% 
+  filter(!is.na(mtot)) %>% 
+  mutate(menopause = factor(mtot, labels = c("Pre-menopause", "Post-menopause"))) %>% 
+  CreateTableOne("menopause", strata = "prev_sle", data =.) %>% 
+  print(showAllLevels = TRUE, pDigits = 4) %>% 
+  kableone()
+```
+
+* To examine the effect of post-menopause, an interaction term between gender (0 = Male; 1 = Female) and menopausal status (0 = Pre-menopause, including men; 1 = Post-menopause) was included into the models above.
+  * In the last model below, the OR associated with this interaction term compares post-menopausal women against **pre-menopausal women**.
+  * In the last model, the OR associated with gender compares **pre-menopausal** women against men. However, in Model 1-4, this OR for gender compares **all women** against men.
+  * Note that because of inclusion of this interaction term, the reference for gender has changed to males.
+
+* The table below shows estimated odds ratios and 95% Wald confidence intervals from each logistic model:
+
+```{r echo = FALSE, results = 'asis'}
+# Models with menopause variable
+lupus_menop <- lupus_md %>% 
+  mutate(menopause = ifelse(sex == "Male", 0, mtot),
+         menopause = factor(menopause, labels = c("Pre-menopause", "Post-menopause")),
+         PM_female = (2 - as.numeric(sex)) * (as.numeric(menopause) - 1),
+         sex = fct_relevel(sex, c("Male", "Female"))) %>% 
+  filter(!is.na(PM_female))
+
+RHS <- c("agecat", "black", "sex")
+fm <- formula(paste("prev_sle ~", paste0(RHS, collapse = " + ")))
+m1 <- glm(fm, data = lupus_menop, family = "binomial")
+m2 <- update(m1, . ~ . + vegstat3)
+m3 <- update(m1, . ~ . + vegstat3 + educat3)
+m4 <- update(m1, . ~ . + vegstat3 + educat3 + smkever)
+m5 <- update(m1, . ~ . + vegstat3 + educat3 + smkever + PM_female)
+
+models <- list(m1, m2, m3, m4, m5)
+ci <- list(exp(confint.default(m1)), 
+           exp(confint.default(m2)), 
+           exp(confint.default(m3)), 
+           exp(confint.default(m4)), 
+           exp(confint.default(m5)))
+var_labels <- c("Age.: 30-39", 
+                "Age.: 40-59", 
+                "Race: Black", 
+                "Sex.: Female", 
+                "Diet: Vegetarians", 
+                "Diet: Pesco veg", 
+                "Educ: HS or less",
+                "Educ: Some college",
+                "Smkg: Ever", 
+                "Mnps: Post-menopause")
+stargazer::stargazer(models, 
+                     type = "html", 
+                     digits = 2,
+                     dep.var.caption = "",
+                     dep.var.labels = "Outcome: Prevalent SLE",
+                     model.numbers = FALSE,
+                     column.labels = c("Model 1", "Model 2", "Model 3", "Model 4", "Model 5"),
+                     covariate.labels = var_labels,
+                     apply.coef = exp, 
+                     ci.custom = ci, 
+                     star.cutoffs = NA, 
+                     omit = "Constant", 
+                     omit.stat = c("aic", "ll"),
+                     omit.table.layout = "n")
+```
+
+* Notice that due to missing values on the menopausal status, the sample size of the analytic data further reduced by *n* = `r lupus %>% filter(sex == "Female" & is.na(mtot)) %>% tally()`.
+  
+* The table below compares participants' characteristics between those with menopause status missing or not:
+
+```{r echo = FALSE}
+table_vars <- c("age", "agecat", "black", "sex", "smkever", "educat3", "vegstat3", "bmi", "bmicat")
+lupus %>% 
+  mutate(menopause = ifelse(sex == "Male", 0, mtot),
+         menopause = factor(menopause, labels = c("Pre-menopause", "Post-menopause")),
+         PM_female = (2 - as.numeric(sex)) * (as.numeric(menopause) - 1),
+         menop_miss = ifelse(is.na(menopause), 1, 0),
+         menop_miss = factor(menop_miss, labels = c("Not missing", "missing"))) %>% 
+  CreateTableOne(table_vars, strata = "menop_miss", data = .) %>% 
+  print(showAllLevels = TRUE, pDigits = 4) %>% 
+  kableone()
+```
+
+

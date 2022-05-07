@@ -151,7 +151,101 @@ stargazer::stargazer(models,
                      omit.stat = c("aic", "ll"),
                      omit.table.layout = "n")
 
-lupus %>% filter(prev_sle == "Yes") %>% select(fishoily, sley) %>% table()
+# Year of diagnosis and start of supplements
+lupus %>% select(sley) %>% table()
+lupus %>% select(vitdy) %>% table()
+
+lupus %>% 
+  mutate(sley = ifelse(sley == 0, NA, sley),
+         sley = factor(sley, labels = c("<5 yrs", "5-9 yrs", "10-14 yrs", "15-19 yrs", "20+ yrs")),
+         vitdy = factor(vitdy, labels = c("0-4 yrs", "0-4 yrs", "5-9 yrs", "10+ yrs"))) %>% 
+  select(sley, vitdy) %>% table()
+
+lupus %>% 
+  mutate(sley = ifelse(sley == 0, NA, sley),
+         sley = factor(sley, labels = c("<5 yrs", "5-9 yrs", "10-14 yrs", "15-19 yrs", "20+ yrs")),
+         fishoily = factor(fishoily, labels = c("0-4 yrs", "0-4 yrs", "5-9 yrs", "10+ yrs"))) %>% 
+  select(sley, fishoily) %>% table()
+
+# Menopause status
+# Check data
+lupus %>% select(sex, mtot, ageatmenopause)
+lupus %>% filter(mtot == 0) %>% select(sex, mtot, ageatmenopause)
+lupus %>% select(mtot) %>% table()
+
+# Number of missing values on mtot: 580
+lupus %>%
+  filter(sex == "Female" & is.na(mtot)) %>% 
+  tally()
+
+# Compare proportions by SLE only among females
+lupus %>% 
+  filter(!is.na(mtot)) %>% 
+  mutate(menopause = factor(mtot, labels = c("Pre-menopause", "Post-menopause"))) %>% 
+  CreateTableOne("menopause", strata = "prev_sle", data =.) %>% 
+  print(showAllLevels = TRUE)
+
+# Models with menopause variable
+lupus_menop <- lupus_md %>% 
+  mutate(menopause = ifelse(sex == "Male", 0, mtot),
+         menopause = factor(menopause, labels = c("Pre-menopause", "Post-menopause")),
+         PM_female = (2 - as.numeric(sex)) * (as.numeric(menopause) - 1),
+         sex = fct_relevel(sex, c("Male", "Female"))) %>% 
+  filter(!is.na(PM_female))
+
+# Sanity check
+lupus_menop %>% select(sex, menopause) %>% table()
+lupus_menop %>% select(sex, menopause, PM_female) %>% distinct()
+
+RHS <- c("agecat", "black", "sex")
+fm <- formula(paste("prev_sle ~", paste0(RHS, collapse = " + ")))
+m1 <- glm(fm, data = lupus_menop, family = "binomial")
+m2 <- update(m1, . ~ . + vegstat3)
+m3 <- update(m1, . ~ . + vegstat3 + educat3)
+m4 <- update(m1, . ~ . + vegstat3 + educat3 + smkever)
+m5 <- update(m1, . ~ . + vegstat3 + educat3 + smkever + PM_female)
+
+models <- list(m1, m2, m3, m4, m5)
+ci <- list(exp(confint.default(m1)), 
+           exp(confint.default(m2)), 
+           exp(confint.default(m3)), 
+           exp(confint.default(m4)), 
+           exp(confint.default(m5)))
+var_labels <- c("Age.: 30-39", 
+                "Age.: 40-59", 
+                "Race: Black", 
+                "Sex.: Female", 
+                "Diet: Vegetarians", 
+                "Diet: Pesco veg", 
+                "Educ: HS or less",
+                "Educ: Some college",
+                "Smkg: Ever", 
+                "Mnps: Post-menopause")
+stargazer::stargazer(models, 
+                     type = "text", 
+                     digits = 2,
+                     dep.var.caption = "",
+                     dep.var.labels = "Outcome: Prevalent SLE",
+                     model.numbers = FALSE,
+                     column.labels = c("Model 1", "Model 2", "Model 3", "Model 4", "Model 5"),
+                     covariate.labels = var_labels,
+                     apply.coef = exp, 
+                     ci.custom = ci, 
+                     star.cutoffs = NA, 
+                     omit = "Constant", 
+                     omit.stat = c("aic", "ll"),
+                     omit.table.layout = "n")
+
+# Comparing participants' characteristics for those with or without missing value on menopausal status
+table_vars <- c("age", "agecat", "black", "sex", "smkever", "educat3", "vegstat3", "bmi", "bmicat")
+lupus %>% 
+  mutate(menopause = ifelse(sex == "Male", 0, mtot),
+         menopause = factor(menopause, labels = c("Pre-menopause", "Post-menopause")),
+         PM_female = (2 - as.numeric(sex)) * (as.numeric(menopause) - 1),
+         menop_miss = ifelse(is.na(menopause), 1, 0),
+         menop_miss = factor(menop_miss, labels = c("Not missing", "missing"))) %>% 
+  CreateTableOne(table_vars, strata = "menop_miss", data = .) %>% 
+  print(showAllLevels = TRUE)
 
 # Interaction b/w dietary pattern and vd supp use
 # m6 <- update(m1, . ~ . + vegstat3 * take_vd + smkever + educat3 + bmicat)

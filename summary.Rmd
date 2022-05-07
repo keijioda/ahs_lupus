@@ -171,10 +171,10 @@ lupus %>%
   kableone()
 ```
 
-* To examine the effect of post-menopause, an interaction term between gender (0 = Male; 1 = Female) and menopausal status (0 = Pre-menopause, including men; 1 = Post-menopause) was included into the models above.
-  * In the last model below, the OR associated with this interaction term compares post-menopausal women against **pre-menopausal women**.
-  * In the last model, the OR associated with gender compares **pre-menopausal** women against men. However, in Model 1-4, this OR for gender compares **all women** against men.
+* To examine the effect of post-menopause, an interaction term between gender (0 = Male; 1 = Female) and menopausal status (0 = Pre-menopause, including men; 1 = Post-menopause) was added into the model (Model 5 below).
   * Note that because of inclusion of this interaction term, the reference for gender has changed to males.
+  * In the last model below, the OR associated with this interaction term compares post-menopausal women against **pre-menopausal women**.
+  * Interpretation of the OR associated with gender is different when the model includes this interaction term. In Models 1-4, the OR for gender compares **all women** against men. However, in Model 5, this compares **pre-menopausal women** against men.
 
 * The table below shows estimated odds ratios and 95% Wald confidence intervals from each logistic model:
 

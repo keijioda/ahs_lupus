@@ -151,6 +151,16 @@ stargazer::stargazer(models,
                      omit.stat = c("aic", "ll"),
                      omit.table.layout = "n")
 
+# Trend p-values
+lupus %>% select(agecat) %>% table()
+lupus %>% select(agecat) %>% mutate(agecat = as.numeric(agecat)) %>% table()
+temp <- update(m1, .~. - agecat + as.numeric(agecat))
+str(summary(temp))
+test <- summary(temp)$coef
+is.array(test)
+
+test[1, 2]
+
 # Year of diagnosis and start of supplements
 lupus %>% select(sley) %>% table()
 lupus %>% select(vitdy) %>% table()

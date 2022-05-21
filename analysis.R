@@ -152,14 +152,71 @@ stargazer::stargazer(models,
                      omit.table.layout = "n")
 
 # Trend p-values
-lupus %>% select(agecat) %>% table()
-lupus %>% select(agecat) %>% mutate(agecat = as.numeric(agecat)) %>% table()
-temp <- update(m1, .~. - agecat + as.numeric(agecat))
-str(summary(temp))
-test <- summary(temp)$coef
-is.array(test)
+getLastPval <- function(x) broom::tidy(x) %>% select(p.value) %>% slice(nrow(.))
 
-test[1, 2]
+Mod1 <- Mod2 <- Mod3 <- Mod4 <- Mod5 <- list()
+
+# Model 1, age
+Mod1["agecat"] <- update(m1, .~. - agecat + as.numeric(agecat)) %>% 
+  getLastPval()
+
+# Model 2, age
+Mod2["agecat"] <- update(m2, .~. - agecat + as.numeric(agecat)) %>% 
+  getLastPval()
+
+# Model 2, vegstat3
+Mod2["vegstat3"] <- update(m2, .~. - vegstat3 + as.numeric(vegstat3), data = lupus) %>% 
+  getLastPval()
+
+# Model 3, age
+Mod3["agecat"] <- update(m3, .~. - agecat + as.numeric(agecat)) %>% 
+  getLastPval()
+
+# Model 3, vegstat3
+Mod3["vegstat3"] <- update(m3, .~. - vegstat3 + as.numeric(vegstat3), data = lupus) %>% 
+  getLastPval()
+
+# Model 3, educat3
+Mod3["educat3"] <- update(m3, .~. - educat3 + as.numeric(educat3), data = lupus) %>% 
+  getLastPval()
+
+# Model 4, age
+Mod4["agecat"] <- update(m4, .~. - agecat + as.numeric(agecat)) %>% 
+  getLastPval()
+
+# Model 4, vegstat3
+Mod4["vegstat3"] <- update(m4, .~. - vegstat3 + as.numeric(vegstat3), data = lupus) %>% 
+  getLastPval()
+
+# Model 4, educat3
+Mod4["educat3"] <- update(m4, .~. - educat3 + as.numeric(educat3), data = lupus) %>% 
+  getLastPval()
+
+# Model 5, age
+Mod5["agecat"] <- update(m5, .~. - agecat + as.numeric(agecat)) %>% 
+  getLastPval()
+
+# Model 5, vegstat3
+Mod5["vegstat3"] <- lupus %>% 
+  mutate(kcal100 = kcal / 100) %>% 
+  update(m5, .~. - vegstat3 + as.numeric(vegstat3), data = .) %>% 
+  getLastPval()
+
+# Model 5, educat3
+Mod5["educat3"] <- lupus %>% 
+  mutate(kcal100 = kcal / 100) %>% 
+  update(m5, .~. - educat3 + as.numeric(educat3), data = .) %>% 
+  getLastPval()
+
+# Model 5, BMI
+Mod5["bmicat"] <- update(m5, .~. - bmicat + as.numeric(bmicat)) %>% 
+  getLastPval()
+
+all_trend <- list(Mod1, Mod2, Mod3, Mod4, Mod5)
+names(all_trend) <- paste0("Model", 1:5)
+all_trend %>% 
+  map(as.data.frame) %>% 
+  map(\(x) round(x, 4))
 
 # Year of diagnosis and start of supplements
 lupus %>% select(sley) %>% table()

@@ -1176,6 +1176,30 @@ Observations
 </tr>
 </table>
 
+-   Trend p-values of all models are shown below:
+
+<!-- -->
+
+    ## $Model1
+    ##   agecat
+    ## 1 0.2448
+    ## 
+    ## $Model2
+    ##   agecat vegstat3
+    ## 1 0.2719    0.032
+    ## 
+    ## $Model3
+    ##   agecat vegstat3 educat3
+    ## 1 0.3652   0.0221  0.2411
+    ## 
+    ## $Model4
+    ##   agecat vegstat3 educat3
+    ## 1 0.4582   0.0621  0.0793
+    ## 
+    ## $Model5
+    ##   agecat vegstat3 educat3 bmicat
+    ## 1  0.462   0.1388   0.066 0.0982
+
 ## Examining the effect of menopausal status
 
 -   Menopausal status by case/non-case among women:

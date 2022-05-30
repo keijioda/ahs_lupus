@@ -511,8 +511,8 @@ Obese
     -   Model 2 adds dietary patterns
     -   Model 3 further adds education levels
     -   Model 4 further adds smoking history
-    -   Model 5 further adds BMI categories and energy intake (kcal as
-        continuous)
+    -   Model 5a further adds BMI categories
+    -   Model 5b replace BMI with energy intake (kcal as continuous)
     -   (I have changed references in some variables)
 -   The table below shows estimated odds ratios and 95% Wald confidence
     intervals from each logistic model:
@@ -545,10 +545,10 @@ Model 3
 Model 4
 </td>
 <td>
-Model 5
+Model 5a
 </td>
 <td>
-Model 6
+Model 5b
 </td>
 </tr>
 <tr>
@@ -575,7 +575,7 @@ Age.: 30-39
 0.53
 </td>
 <td>
-0.52
+0.51
 </td>
 </tr>
 <tr>
@@ -597,7 +597,7 @@ Age.: 30-39
 (0.30, 0.93)
 </td>
 <td>
-(0.30, 0.93)
+(0.29, 0.90)
 </td>
 </tr>
 <tr>
@@ -697,7 +697,7 @@ Race: Black
 1.62
 </td>
 <td>
-1.62
+1.68
 </td>
 </tr>
 <tr>
@@ -719,7 +719,7 @@ Race: Black
 (1.23, 2.13)
 </td>
 <td>
-(1.23, 2.13)
+(1.28, 2.21)
 </td>
 </tr>
 <tr>
@@ -818,7 +818,7 @@ Diet: Vegetarians
 0.79
 </td>
 <td>
-0.79
+0.75
 </td>
 </tr>
 <tr>
@@ -839,7 +839,7 @@ Diet: Vegetarians
 (0.58, 1.08)
 </td>
 <td>
-(0.58, 1.08)
+(0.56, 1.02)
 </td>
 </tr>
 <tr>
@@ -877,7 +877,7 @@ Diet: Pesco veg
 0.92
 </td>
 <td>
-0.92
+0.88
 </td>
 </tr>
 <tr>
@@ -898,7 +898,7 @@ Diet: Pesco veg
 (0.59, 1.42)
 </td>
 <td>
-(0.59, 1.42)
+(0.57, 1.36)
 </td>
 </tr>
 <tr>
@@ -935,7 +935,7 @@ Educ: HS or less
 0.70
 </td>
 <td>
-0.70
+0.72
 </td>
 </tr>
 <tr>
@@ -955,7 +955,7 @@ Educ: HS or less
 (0.48, 1.02)
 </td>
 <td>
-(0.48, 1.02)
+(0.49, 1.04)
 </td>
 </tr>
 <tr>
@@ -992,7 +992,7 @@ Educ: Some college
 0.86
 </td>
 <td>
-0.86
+0.87
 </td>
 </tr>
 <tr>
@@ -1012,7 +1012,7 @@ Educ: Some college
 (0.64, 1.16)
 </td>
 <td>
-(0.64, 1.16)
+(0.65, 1.17)
 </td>
 </tr>
 <tr>
@@ -1048,7 +1048,7 @@ Smkg: Ever
 1.68
 </td>
 <td>
-1.68
+1.71
 </td>
 </tr>
 <tr>
@@ -1067,7 +1067,7 @@ Smkg: Ever
 (1.25, 2.27)
 </td>
 <td>
-(1.25, 2.27)
+(1.27, 2.31)
 </td>
 </tr>
 <tr>
@@ -1102,7 +1102,6 @@ BMI.: Overweight
 1.29
 </td>
 <td>
-1.29
 </td>
 </tr>
 <tr>
@@ -1120,7 +1119,6 @@ BMI.: Overweight
 (0.94, 1.78)
 </td>
 <td>
-(0.93, 1.78)
 </td>
 </tr>
 <tr>
@@ -1155,7 +1153,6 @@ BMI.: Obese
 1.32
 </td>
 <td>
-1.32
 </td>
 </tr>
 <tr>
@@ -1173,7 +1170,6 @@ BMI.: Obese
 (0.95, 1.85)
 </td>
 <td>
-(0.95, 1.85)
 </td>
 </tr>
 <tr>
@@ -1280,29 +1276,29 @@ Observations
 
 <!-- -->
 
-    ## $Model1
+    ## $`Model 1`
     ##   agecat
     ## 1 0.2448
     ## 
-    ## $Model2
+    ## $`Model 2`
     ##   agecat vegstat3
     ## 1 0.2719    0.032
     ## 
-    ## $Model3
+    ## $`Model 3`
     ##   agecat vegstat3 educat3
     ## 1 0.3652   0.0221  0.2411
     ## 
-    ## $Model4
+    ## $`Model 4`
     ##   agecat vegstat3 educat3
     ## 1 0.4582   0.0621  0.0793
     ## 
-    ## $Model5
+    ## $`Model 5a`
     ##   agecat vegstat3 educat3 bmicat
     ## 1 0.4613   0.1389  0.0649 0.0961
     ## 
-    ## $Model6
-    ##   agecat vegstat3 educat3 bmicat
-    ## 1  0.462   0.1388   0.066 0.0982
+    ## $`Model 5b`
+    ##   agecat vegstat3 educat3
+    ## 1 0.4593   0.0624  0.0808
 
 ## Examining the effect of menopausal status
 

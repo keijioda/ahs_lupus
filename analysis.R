@@ -116,14 +116,16 @@ m1 <- glm(fm, data = lupus_md, family = "binomial")
 m2 <- update(m1, . ~ . + vegstat3)
 m3 <- update(m1, . ~ . + vegstat3 + educat3)
 m4 <- update(m1, . ~ . + vegstat3 + educat3 + smkever)
-m5 <- update(m1, . ~ . + vegstat3 + educat3 + smkever + bmicat + kcal100)
+m5 <- update(m1, . ~ . + vegstat3 + educat3 + smkever + bmicat)
+m6 <- update(m1, . ~ . + vegstat3 + educat3 + smkever + bmicat + kcal100)
 
-models <- list(m1, m2, m3, m4, m5)
+models <- list(m1, m2, m3, m4, m5, m6)
 ci <- list(exp(confint.default(m1)), 
            exp(confint.default(m2)), 
            exp(confint.default(m3)), 
            exp(confint.default(m4)), 
-           exp(confint.default(m5)))
+           exp(confint.default(m5)), 
+           exp(confint.default(m6)))
 var_labels <- c("Age.: 30-39", 
                 "Age.: 40-59", 
                 "Race: Black", 
@@ -142,7 +144,7 @@ stargazer::stargazer(models,
                      dep.var.caption = "",
                      dep.var.labels = "Outcome: Prevalent SLE",
                      model.numbers = FALSE,
-                     column.labels = c("Model 1", "Model 2", "Model 3", "Model 4", "Model 5"),
+                     column.labels = c("Model 1", "Model 2", "Model 3", "Model 4", "Model 5", "Model 6"),
                      covariate.labels = var_labels,
                      apply.coef = exp, 
                      ci.custom = ci, 
@@ -154,7 +156,7 @@ stargazer::stargazer(models,
 # Trend p-values
 getLastPval <- function(x) broom::tidy(x) %>% select(p.value) %>% slice(nrow(.))
 
-Mod1 <- Mod2 <- Mod3 <- Mod4 <- Mod5 <- list()
+Mod1 <- Mod2 <- Mod3 <- Mod4 <- Mod5 <- Mod6 <- list()
 
 # Model 1, age
 Mod1["agecat"] <- update(m1, .~. - agecat + as.numeric(agecat)) %>% 
@@ -197,23 +199,40 @@ Mod5["agecat"] <- update(m5, .~. - agecat + as.numeric(agecat)) %>%
   getLastPval()
 
 # Model 5, vegstat3
-Mod5["vegstat3"] <- lupus %>% 
-  mutate(kcal100 = kcal / 100) %>% 
-  update(m5, .~. - vegstat3 + as.numeric(vegstat3), data = .) %>% 
+Mod5["vegstat3"] <- update(m5, .~. - vegstat3 + as.numeric(vegstat3), data = lupus) %>% 
   getLastPval()
 
 # Model 5, educat3
-Mod5["educat3"] <- lupus %>% 
-  mutate(kcal100 = kcal / 100) %>% 
-  update(m5, .~. - educat3 + as.numeric(educat3), data = .) %>% 
+Mod5["educat3"] <- update(m5, .~. - educat3 + as.numeric(educat3), data = lupus) %>% 
   getLastPval()
 
 # Model 5, BMI
 Mod5["bmicat"] <- update(m5, .~. - bmicat + as.numeric(bmicat)) %>% 
   getLastPval()
 
-all_trend <- list(Mod1, Mod2, Mod3, Mod4, Mod5)
-names(all_trend) <- paste0("Model", 1:5)
+# Model 6, age
+Mod6["agecat"] <- update(m6, .~. - agecat + as.numeric(agecat)) %>% 
+  getLastPval()
+
+# Model 6, vegstat3
+Mod6["vegstat3"] <- lupus %>% 
+  mutate(kcal100 = kcal / 100) %>% 
+  update(m6, .~. - vegstat3 + as.numeric(vegstat3), data = .) %>% 
+  getLastPval()
+
+# Model 6, educat3
+Mod6["educat3"] <- lupus %>% 
+  mutate(kcal100 = kcal / 100) %>% 
+  update(m6, .~. - educat3 + as.numeric(educat3), data = .) %>% 
+  getLastPval()
+
+# Model 6, BMI
+Mod6["bmicat"] <- update(m6, .~. - bmicat + as.numeric(bmicat)) %>% 
+  getLastPval()
+
+
+all_trend <- list(Mod1, Mod2, Mod3, Mod4, Mod5, Mod6)
+names(all_trend) <- paste0("Model", 1:6)
 all_trend %>% 
   map(as.data.frame) %>% 
   map(\(x) round(x, 4))

@@ -57,6 +57,17 @@ levels(lupus$vegstat3) <- c("Vegetarians", "Vegetarians", "Pesco", "Non-veg", "N
 dim(lupus)
 lupus %>% count(prev_sle) %>% mutate(pct = n / sum(n) * 100)
 
+# Past or current smoker
+lupus %>% 
+  filter(smoke > 1 & is.na(smokenow)) %>% 
+  group_by(prev_sle) %>% 
+  count()
+
+lupus %>% 
+  filter(smokenow == 1) %>% 
+  group_by(prev_sle) %>% 
+  count()
+
 # Descriptive table
 table_vars <- c("age", "agecat", "black", "sex", "smkever", "educat3", "vegstat3", "take_vd", "take_fo", "bmi", "bmicat")
 lupus %>% CreateTableOne(table_vars, strata = "prev_sle", data = .) %>%

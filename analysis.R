@@ -58,11 +58,21 @@ dim(lupus)
 lupus %>% count(prev_sle) %>% mutate(pct = n / sum(n) * 100)
 
 # Past or current smoker
+lupus %>% select(smkever) %>% table() / nrow(lupus) * 100
+
+lupus %>% 
+  filter(smoke > 1 & is.na(smokenow)) %>% 
+  count() / nrow(lupus) * 100
+  
 lupus %>% 
   filter(smoke > 1 & is.na(smokenow)) %>% 
   group_by(prev_sle) %>% 
   count()
 
+lupus %>% 
+  filter(smokenow == 1) %>% 
+  count() / nrow(lupus) * 100
+  
 lupus %>% 
   filter(smokenow == 1) %>% 
   group_by(prev_sle) %>% 
